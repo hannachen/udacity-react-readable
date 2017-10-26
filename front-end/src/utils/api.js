@@ -18,20 +18,21 @@ class Api {
       })
   }
 
-  /*
-  function fetchPosts() {
-    const URL = "https://jsonplaceholder.typicode.com/posts";
-    return fetch(URL, { method: 'GET'})
-      .then( response => Promise.all([response, response.json()]));
-  }
-  */
-
   static fetchPosts(category = '') {
     category = category.trim()
-    console.log('FETCH CATEGORY?', category)
     const request = new Request(`http://localhost:3001/${category}/posts`, {
       method: 'GET',
       headers: this.requestHeaders(),
+    })
+    return fetch(request)
+      .then((res) => res.json())
+  }
+
+  static addPost(data) {
+    const request = new Request(`http://localhost:3001/posts`, {
+      method: 'POST',
+      headers: this.requestHeaders(),
+      body: data,
     })
     return fetch(request)
       .then((res) => res.json())

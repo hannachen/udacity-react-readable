@@ -8,6 +8,16 @@ export const posts = (state = [], action) => {
         ...state,
         [category]: posts
       }
+    case types.ADD_POST:
+      const { newPost } = action
+      const categoryPosts = state[newPost.category] || []
+      return {
+        ...state,
+        [newPost.category]: [
+          ...categoryPosts,
+          newPost
+        ]
+      }
     default:
       return state
   }

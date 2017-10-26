@@ -26,7 +26,6 @@ export function fetchCategoriesSuccess(categories) {
 
 // POSTS
 export function fetchPosts(category) {
-  console.log('fetchPosts', category)
   return function(dispatch) {
     return api.fetchPosts(category).then((posts) => {
       dispatch(fetchPostsSuccess({ category, posts }))
@@ -42,12 +41,20 @@ export function fetchPostsSuccess({ category, posts }) {
     posts,
   }
 }
-export function addPost({ user, category, post }) {
+export function addPost(data) {
+  return function(dispatch) {
+    return api.addPost(data).then((response) => {
+      const newPost = Object.assign({}, data, response);
+      dispatch(addPostSuccess(newPost))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+export function addPostSuccess(newPost) {
   return {
     type: ADD_POST,
-    user,
-    category,
-    post,
+    newPost,
   }
 }
 export function editPost({ user, post }) {

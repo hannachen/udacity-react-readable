@@ -1,9 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPosts } from '../actions'
+import { fetchPosts } from '../../actions'
+import { Link } from 'react-router-dom'
 
-class PostsList extends Component {
+class PostList extends Component {
+  constructor() {
+    super()
+
+    this.fetchPosts = this.fetchPosts.bind(this)
+  }
   componentWillMount() {
+    const { posts } = this.props
+
+    /**
+     * Fetch posts from API -- this doesn't really work with persisted data,
+     * should always fetch posts on load to check for new posts by other users
+     */
+    if (!posts) {
+      this.fetchPosts()
+    }
+  }
+  fetchPosts() {
     const { fetchPosts } = this.props
     const { categoryId } = this.props.match.params
     fetchPosts(categoryId)
@@ -13,6 +30,9 @@ class PostsList extends Component {
     return (
       <div className='category'>
         <h1>{category}</h1>
+        <ul>
+          <li><Link to={`/post/new/${category}`}>Add Post</Link></li>
+        </ul>
         <ul className='post-list'>
           {posts &&
           posts.map((post) => (
@@ -44,4 +64,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PostsList)
+)(PostList)
