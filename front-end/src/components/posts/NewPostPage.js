@@ -3,9 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
 import { addPost } from '../../actions'
-import './NewPostPage.css'
-
-//| `POST /posts` | Add a new post. | **id** - UUID should be fine, but any unique id will work <br> **timestamp** - [Timestamp] Can in whatever format you like, you can use `Date.now()` if you like. <br> **title** - [String] <br> **body** - [String] <br> **author** - [String] <br> **category** -  Any of the categories listed in `categories.js`. Feel free to extend this list as you desire. |
+import './posts.css'
 
 class NewPostPage extends Component {
   state = {
@@ -58,7 +56,7 @@ class NewPostPage extends Component {
       return <Redirect to={`/category/${category}`} />;
     }
     return (
-      <div className='category'>
+      <div className='post'>
         <h1 className="title">Add a post to <strong>{category}</strong></h1>
         <div className='new-post'>
           <input

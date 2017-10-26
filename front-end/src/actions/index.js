@@ -1,8 +1,9 @@
 import api from '../utils/api'
 
-export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS'
-export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS'
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
+export const FETCH_POSTS = 'FETCH_POSTS'
 export const ADD_POST = 'ADD_POST'
+export const GET_POST = 'GET_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const SCORE_COMMENT = 'SCORE_COMMENT'
@@ -19,7 +20,7 @@ export function fetchCategories() {
 }
 export function fetchCategoriesSuccess(categories) {
   return {
-    type: FETCH_CATEGORIES_SUCCESS,
+    type: FETCH_CATEGORIES,
     categories,
   }
 }
@@ -36,7 +37,7 @@ export function fetchPosts(category) {
 }
 export function fetchPostsSuccess({ category, posts }) {
   return {
-    type: FETCH_POSTS_SUCCESS,
+    type: FETCH_POSTS,
     category,
     posts,
   }
@@ -55,6 +56,21 @@ export function addPostSuccess(newPost) {
   return {
     type: ADD_POST,
     newPost,
+  }
+}
+export function fetchPost(id) {
+  return function(dispatch) {
+    return api.fetchPost(id).then((response) => {
+      dispatch(fetchPostSuccess(response))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+export function fetchPostSuccess(post) {
+  return {
+    type: GET_POST,
+    post,
   }
 }
 export function editPost({ user, post }) {

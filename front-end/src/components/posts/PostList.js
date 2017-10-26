@@ -16,7 +16,7 @@ class PostList extends Component {
      * Fetch posts from API -- this doesn't really work with persisted data,
      * should always fetch posts on load to check for new posts by other users
      */
-    if (!posts) {
+    if (!posts.length) {
       this.fetchPosts()
     }
   }
@@ -35,13 +35,19 @@ class PostList extends Component {
         </ul>
         <ul className='post-list'>
           {posts &&
-          posts.map((post) => (
-            <li key={post.id}>
-              <h4>{post.title}</h4>
-              <p>{post.author}</p>
-              <p>{post.body}</p>
-            </li>
-          ))}
+          Object.keys(posts).map((postId) => {
+            const post = posts[postId]
+            return (
+              <li key={post.id}>
+                <h4>
+                  <Link to={`/post/view/${post.id}`}>{post.title}</Link>
+                </h4>
+                <p>{post.commentCount} comments</p>
+                <p>{post.author}</p>
+                <p>{post.body}</p>
+              </li>
+            )
+          })}
         </ul>
       </div>
     )
@@ -50,9 +56,12 @@ class PostList extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { categoryId } = ownProps.match.params
+  const categoryPosts = state.posts['byCategory'][categoryId] || []
   return {
     category: categoryId,
-    posts: state.posts[categoryId],
+    posts: categoryPosts.map((post) => {
+      return state.posts['all'][post] || []
+    }),
   }
 }
 const mapDispatchToProps = (dispatch) => {

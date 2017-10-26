@@ -28,6 +28,16 @@ class Api {
       .then((res) => res.json())
   }
 
+  static fetchPost(id = '') {
+    id = id.trim()
+    const request = new Request(`http://localhost:3001/posts/${id}`, {
+      method: 'GET',
+      headers: this.requestHeaders(),
+    })
+    return fetch(request)
+      .then((res) => res.json())
+  }
+
   static addPost(data) {
     const request = new Request(`http://localhost:3001/posts`, {
       method: 'POST',
