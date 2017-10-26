@@ -5,22 +5,17 @@ import { fetchPost } from '../../actions'
 import './posts.css'
 
 class NewPostPage extends Component {
-  constructor() {
-    super()
-
+  constructor(props, context) {
+    super(props, context)
+    this.fetchPost()
     this.fetchPost = this.fetchPost.bind(this)
   }
-  componentWillMount() {
-    const { post } = this.props
+  fetchPost() {
+    const { post, fetchPost } = this.props
     if (!post) {
       const { postId } = this.props.match.params
-      this.fetchPost(postId)
+      fetchPost(postId)
     }
-  }
-  componentWillReceiveProps(nextProps) {}
-  fetchPost(id) {
-    const { fetchPost } = this.props
-    fetchPost(id)
   }
   render() {
     const { post } = this.props

@@ -16,34 +16,40 @@ export const posts = (state = initialState, action) => {
       return {
         ...state,
         'byCategory': {
+          ...state['byCategory'],
           [category]: Object.keys(namedPosts),
         },
         'all': {
+          ...state['all'],
           ...namedPosts
         }
       }
     case types.GET_POST:
       const { post } = action
-      const categoryPosts = state[post.category] || []
+      const categoryPosts = state['byCategory'][post.category] || []
       return {
         ...state,
         'byCategory': {
+          ...state['byCategory'],
           [post.category]: categoryPosts.concat(post.id),
         },
         'all': {
-          ...state[post.category],
+          ...state['all'],
           [post.id]: post
         }
       }
     case types.ADD_POST:
+    case types.EDIT_POST:
       const { newPost } = action
+      const newPosts = state['byCategory'][newPost.category] || []
       return {
         ...state,
         'byCategory': {
-          [newPost.category]: Object.keys(newPost),
+          ...state['byCategory'],
+          [newPost.category]: newPosts.concat(newPost.id),
         },
         'all': {
-          ...state[newPost.category],
+          ...state['all'],
           [newPost.id]: newPost
         }
       }

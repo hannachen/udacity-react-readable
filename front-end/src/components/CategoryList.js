@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom'
 import { fetchCategories } from '../actions'
 
 class CategoryList extends Component {
-  constructor(props, context) {
-    super(props, context)
-    const { fetchCategories } = this.props
-    fetchCategories()
-  }
   render() {
     const { categories } = this.props
     if (!categories || categories.length === 0) {

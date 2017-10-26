@@ -2,36 +2,70 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
-import { addPost } from '../../actions'
+import { fetchPost, addPost, editPost } from '../../actions'
 import './posts.css'
 
-class NewPostPage extends Component {
+class EditPostPage extends Component {
   state = {
-    id: null,
-    title: null,
-    body: null,
-    author: null,
-    category: null,
+    post: {
+      id: '',
+      title: '',
+      body: '',
+      author: '',
+      category: '',
+    },
+    edit: false,
     redirect: false
   }
-  constructor() {
-    super()
+  constructor(props, context) {
+    super(props, context)
 
+    this.editPost = this.editPost.bind(this)
+    this.addPost = this.addPost.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+
+    const { post } = this.state
+    const postProps = this.props.post
+
+    this.state = {
+      ...this.state,
+      post: Object.assign({}, post, postProps)
+    }
+
+  }
+  componentWillReceiveProps(nextProps) {
+    const { post } = nextProps
+    if (this.state.post !== post) {
+      this.setState({
+        post
+      })
+    }
   }
   componentWillMount() {
+    const postProps = this.props.post
+    const editPostId = postProps.id
+    const edit = (editPostId && editPostId !== '') ? true : false
+    if (edit) {
+      this.editPost(editPostId)
+    } else {
+      this.addPost()
+    }
+  }
+  editPost(id) {
+    const { fetchPost } = this.props
+    fetchPost(id)
+  }
+  addPost() {
     const id = uuid()
-    const { categoryId } = this.props.match.params
     this.setState({
-      id,
-      category: categoryId,
+      post: { id }
     })
   }
   onChange(e) {
-    const state = this.state
-    state[e.target.name] = e.target.value
-    this.setState(state)
+    const { post } = this.state
+    post[e.target.name] = e.target.value
+    this.setState({ post })
   }
   onSubmit(e) {
     e.preventDefault()
@@ -51,23 +85,30 @@ class NewPostPage extends Component {
   }
 
   render() {
-    const { id, title, body, author, category, redirect } = this.state
+    const { post, edit, redirect } = this.state
+    const { id, title, body, author, category } = post
+
+    console.log('111', post)
+
     if (redirect) {
       return <Redirect to={`/category/${category}`} />;
     }
     return (
       <div className='post'>
-        <h1 className="title">Add a post to <strong>{category}</strong></h1>
+        <h1 className="title">
+          {edit && (<span>Add a post to </span>)}
+          <strong>{category}</strong>
+        </h1>
         <div className='new-post'>
           <input
             type='hidden'
             name='id'
-            value={id}
+            defaultValue={id}
           />
           <input
             type='hidden'
             name='category'
-            value={category}
+            defaultValue={category}
           />
           <input
             className='post-input'
@@ -104,18 +145,22 @@ class NewPostPage extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = (state, ownProps) => {
+  const { id, category } = ownProps.post
+  const post = state.posts['all'][id] || { category }
   return {
-    response: posts,
+    post
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchPost: (data) => dispatch(fetchPost(data)),
     newPost: (data) => dispatch(addPost(data)),
+    editPost: (data) => dispatch(editPost(data))
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(NewPostPage)
+)(EditPostPage)

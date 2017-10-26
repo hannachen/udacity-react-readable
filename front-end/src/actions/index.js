@@ -73,10 +73,9 @@ export function fetchPostSuccess(post) {
     post,
   }
 }
-export function editPost({ user, post }) {
+export function editPost(post) {
   return {
     type: EDIT_POST,
-    user,
     post,
   }
 }
