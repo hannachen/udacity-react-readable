@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchCategories } from '../actions'
+import api from '../utils/api'
 
 class Header extends Component {
   constructor(props, context) {
     super(props, context)
-    const { fetchCategories } = this.props
-    fetchCategories()
+
+    this.getCategories()
+  }
+  getCategories() {
+    const { getCategories } = this.props
+    api.fetchCategories()
+      .then(getCategories)
   }
   render() {
     return (
@@ -25,7 +31,7 @@ const mapStateToProps = ({ categories }) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCategories: () => dispatch(fetchCategories()),
+    getCategories: (categories) => dispatch(fetchCategories(categories)),
   }
 }
 

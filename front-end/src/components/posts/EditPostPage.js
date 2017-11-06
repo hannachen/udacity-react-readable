@@ -1,38 +1,42 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import uuid from 'uuid/v1'
-import { fetchPost, addPost, editPost } from '../../actions'
+import { fetchPost, editPost } from '../../actions'
+import api from '../../utils/api'
+import PostForm from './PostForm'
 import './posts.css'
 
 class EditPostPage extends Component {
   state = {
-    post: {
-      id: '',
-      title: '',
-      body: '',
-      author: '',
-      category: '',
-    },
-    edit: false,
+    postId: null,
+    post: null,
     redirect: false
   }
   constructor(props, context) {
     super(props, context)
 
-    this.editPost = this.editPost.bind(this)
-    this.addPost = this.addPost.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
 
-    const { post } = this.state
-    const postProps = this.props.post
-
+    // Initial states
+    const { post } = this.props
+    const { postId } = this.props.match.params
     this.state = {
       ...this.state,
-      post: Object.assign({}, post, postProps)
+      postId,
+      post,
     }
-
+  }
+  componentWillMount() {
+    const { postId, post } = this.state
+    if (!post) {
+      const { fetchPost } = this.props
+      api.fetchPost(postId)
+        .then(fetchPost)
+        .then((res) => {
+          this.setState({ post: res.post })
+        })
+    }
   }
   componentWillReceiveProps(nextProps) {
     const { post } = nextProps
@@ -42,26 +46,6 @@ class EditPostPage extends Component {
       })
     }
   }
-  componentWillMount() {
-    const postProps = this.props.post
-    const editPostId = postProps.id
-    const edit = (editPostId && editPostId !== '') ? true : false
-    if (edit) {
-      this.editPost(editPostId)
-    } else {
-      this.addPost()
-    }
-  }
-  editPost(id) {
-    const { fetchPost } = this.props
-    fetchPost(id)
-  }
-  addPost() {
-    const id = uuid()
-    this.setState({
-      post: { id }
-    })
-  }
   onChange(e) {
     const { post } = this.state
     post[e.target.name] = e.target.value
@@ -70,84 +54,34 @@ class EditPostPage extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    const { newPost } = this.props
-    const timestamp = Math.floor(Date.now() / 1000)
-    const data = {
-      ...this.state,
-      timestamp
-    }
-    delete data.redirect
-
-    newPost(data)
+    const { post } = this.state
+    const { editPost } = this.props
+    api.editPost(post)
+      .then(editPost)
       .then(() => {
         this.setState({ redirect: true })
       })
   }
 
   render() {
-    const { post, edit, redirect } = this.state
-    const { id, title, body, author, category } = post
-
-    console.log('111', post)
+    const { post, redirect } = this.state
 
     if (redirect) {
-      return <Redirect to={`/category/${category}`} />;
+      return <Redirect to={`/category/${post.category}`} />
     }
     return (
       <div className='post'>
-        <h1 className="title">
-          {edit && (<span>Add a post to </span>)}
-          <strong>{category}</strong>
-        </h1>
-        <div className='new-post'>
-          <input
-            type='hidden'
-            name='id'
-            defaultValue={id}
-          />
-          <input
-            type='hidden'
-            name='category'
-            defaultValue={category}
-          />
-          <input
-            className='post-input'
-            type='text'
-            placeholder='Author'
-            name='author'
-            value={author || ''}
-            onChange={this.onChange}
-          />
-          <input
-            className='post-input'
-            type='text'
-            placeholder='Title'
-            name='title'
-            value={title || ''}
-            onChange={this.onChange}
-          />
-          <textarea
-            className='post-input'
-            type='text'
-            placeholder='Body'
-            name='body'
-            value={body || ''}
-            onChange={this.onChange}
-          />
-          <button
-            className='icon-btn'
-            onClick={this.onSubmit}>
-            Add Post
-          </button>
-        </div>
+        {post &&
+          <PostForm post={post} onChange={this.onChange} onSubmit={this.onSubmit} />
+        }
       </div>
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { id, category } = ownProps.post
-  const post = state.posts['all'][id] || { category }
+  const { postId } = ownProps.match.params
+  const post = state.posts['all'][postId] || null
   return {
     post
   }
@@ -155,7 +89,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPost: (data) => dispatch(fetchPost(data)),
-    newPost: (data) => dispatch(addPost(data)),
     editPost: (data) => dispatch(editPost(data))
   }
 }

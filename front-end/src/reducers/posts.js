@@ -31,7 +31,7 @@ export const posts = (state = initialState, action) => {
         ...state,
         'byCategory': {
           ...state['byCategory'],
-          [post.category]: categoryPosts.concat(post.id),
+          [post.category]: Array.from(new Set(categoryPosts.concat(post.id))),
         },
         'all': {
           ...state['all'],
@@ -39,18 +39,31 @@ export const posts = (state = initialState, action) => {
         }
       }
     case types.ADD_POST:
-    case types.EDIT_POST:
       const { newPost } = action
       const newPosts = state['byCategory'][newPost.category] || []
       return {
         ...state,
         'byCategory': {
           ...state['byCategory'],
-          [newPost.category]: newPosts.concat(newPost.id),
+          [newPost.category]: Array.from(new Set(newPosts.concat(newPost.id))),
         },
         'all': {
           ...state['all'],
           [newPost.id]: newPost
+        }
+      }
+    case types.EDIT_POST:
+      const { editPost } = action
+      const editPosts = state['byCategory'][editPost.category] || []
+      return {
+        ...state,
+        'byCategory': {
+          ...state['byCategory'],
+          [editPost.category]: Array.from(new Set(editPosts.concat(editPost.id))),
+        },
+        'all': {
+          ...state['all'],
+          [editPost.id]: editPost
         }
       }
     default:

@@ -1,31 +1,22 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import CategoryList from './CategoryList'
-import PostList from './posts/PostList'
+import CategoryList from './categories/CategoryList'
+import CategoryPage from './categories/CategoryPage'
+import AddPostPage from './posts/AddPostPage'
 import EditPostPage from './posts/EditPostPage'
 import PostPage from './posts/PostPage'
+import AddCommentPage from './comments/AddCommentPage'
 
 class App extends Component {
   render() {
     return (
       <div className="app">
         <Route exact path='/' component={CategoryList} />
-        <Route path='/category/:categoryId' component={PostList} />
-        <Route path='/post/new/:categoryId' render={({ match }) => {
-          const { categoryId } = match.params
-          const post = { category: categoryId }
-          return (
-            <EditPostPage post={post} />
-          )
-        }}/>
-        <Route path='/post/edit/:postId' render={({ match }) => {
-          const { postId } = match.params
-          const post = { id: postId }
-          return (
-            <EditPostPage post={post} />
-          )
-        }}/>
+        <Route path='/category/:categoryId' component={CategoryPage} />
+        <Route path='/post/new/:categoryId' component={AddPostPage} />
+        <Route path='/post/edit/:postId' component={EditPostPage} />
         <Route path='/post/view/:postId' component={PostPage} />
+        <Route path='/comment/new/:postId' component={AddCommentPage} />
       </div>
     )
   }
