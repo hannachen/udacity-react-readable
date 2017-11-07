@@ -12,10 +12,10 @@ class CategoryList extends Component {
     }
     return (
       <ul className='category-list'>
-        {categories && categories.map((category) => (
-          <li key={category.path}>
-            <Link to={`/category/${category.path}`}>
-              <h3>{category.name}</h3>
+        {categories && Object.keys(categories).map((category) => (
+          <li key={categories[category].path}>
+            <Link to={`/category/${categories[category].path}`}>
+              <h3>{categories[category].name}</h3>
             </Link>
           </li>
         ))}
@@ -26,7 +26,7 @@ class CategoryList extends Component {
 
 const mapStateToProps = ({ categories }) => {
   return {
-    categories: categories,
+    categories,
   }
 }
 

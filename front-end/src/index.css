@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif; }
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+  letter-spacing: 0; }
 
 a {
   text-decoration: none; }
@@ -12,48 +13,64 @@ ul {
 li {
   list-style-type: none; }
 
-nav {
+header {
   background-color: #4A4A4A;
   padding: .5em;
   height: 2em;
   display: flex;
   align-items: center; }
-  nav h1,
-  nav a {
+  header h1,
+  header a {
     color: #F7F7F7; }
-  nav a,
-  nav svg,
-  nav .text {
+  header a,
+  header svg,
+  header .text {
     display: flex;
     align-items: center; }
-  nav h1 {
+  header h1 {
     font-size: 1.25em;
     font-weight: normal; }
-  nav .text {
+  header .text {
     padding: 0 0 0 .25em; }
 
 .app {
   padding: 0 .75em; }
 
-.category-page header {
+.category-page nav,
+.post-page nav {
   display: flex;
-  justify-content: space-between; }
-  .category-page header .new-post-link {
+  justify-content: space-between;
+  margin: 0 -.75em;
+  padding: 0 .75em;
+  background-color: #00CEAF; }
+  .category-page nav .new-item-link,
+  .post-page nav .new-item-link {
     display: flex;
-    align-self: center; }
+    align-self: center;
+    font-weight: bold;
+    font-size: .8em; }
+
+.category-page a,
+.post-page a {
+  color: #4A4A4A; }
 
 .category-page em,
-.category-page strong {
+.category-page strong,
+.post-page em,
+.post-page strong {
   display: block;
   font-style: normal;
   line-height: 100%; }
 
-.category-page em {
+.category-page em,
+.post-page em {
   font-weight: normal;
-  font-size: .35em;
+  font-size: .25em;
   text-transform: uppercase;
-  letter-spacing: 0;
   color: #4A4A4A; }
+
+.post-page .category-nav {
+  opacity: .5; }
 
 .post-list li,
 .post-list .post-link,

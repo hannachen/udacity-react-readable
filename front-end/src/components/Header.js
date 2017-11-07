@@ -29,7 +29,7 @@ class Header extends Component {
   render() {
     const { homepage } = this.state
     return (
-      <nav>
+      <header>
         { homepage ? (<h1 className="site-title">Browse Categories</h1>)
           :
           (<Link to={`/`} className="home-link">
@@ -37,7 +37,7 @@ class Header extends Component {
             <span className="text">Back to category list</span>
           </Link>)
         }
-      </nav>
+      </header>
     )
   }
 }

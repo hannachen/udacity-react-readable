@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { fetchPosts } from '../../actions'
 import api from '../../utils/api'
 import PostList from '../posts/PostList'
+import Nav from '../Nav'
 
 class CategoryPage extends Component {
   constructor() {
@@ -26,13 +27,9 @@ class CategoryPage extends Component {
     const { category, posts } = this.props
     return (
       <div className='category-page'>
-        <header>
-          <h1>
-            <em>Category</em>
-            <strong>{category}</strong>
-          </h1>
-          <Link className="new-post-link" to={`/post/new/${category}`}>Add Post</Link>
-        </header>
+        {category &&
+          <Nav category={category} />
+        }
         {posts &&
           <PostList posts={posts} />
         }
@@ -41,13 +38,13 @@ class CategoryPage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ categories, posts }, ownProps) => {
   const { categoryId } = ownProps.match.params
-  const categoryPosts = state.posts['byCategory'][categoryId] || []
+  const categoryPosts = posts['byCategory'][categoryId] || []
   return {
-    category: categoryId,
+    category: categories[categoryId],
     posts: categoryPosts.map((post) => {
-      return state.posts['all'][post] || []
+      return posts['all'][post] || []
     }),
   }
 }

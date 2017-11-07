@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchPost, fetchComments } from '../../actions'
 import api from '../../utils/api'
+import Nav from '../Nav'
 import CommentsList from '../comments/CommentList'
 import './posts.css'
 
@@ -30,18 +31,15 @@ class PostPage extends Component {
   }
 
   render() {
-    const { post, comments } = this.props
+    const { category, post, comments } = this.props
     if (!post) {
       return (
         <div>Post not found</div>
       )
     }
     return (
-      <div className='post'>
-        <Link to={`/post/edit/${post.id}`}>
-          Edit Post
-        </Link>
-        <h4>{post.title}</h4>
+      <div className='post-page'>
+        <Nav category={category} post={post} />
         <p>{post.commentCount} comments</p>
         <p>{post.author}</p>
         <p>{post.body}</p>
@@ -54,12 +52,15 @@ class PostPage extends Component {
   }
 }
 
-const mapStateToProps = ({ posts, comments }, ownProps) => {
+const mapStateToProps = ({ categories, posts, comments }, ownProps) => {
   const { postId } = ownProps.match.params
   const postComments = comments['byPost'][postId] || []
+  const post = posts['all'][postId] || null
+  const category = post && post.category ? categories[post.category] : null
   return {
-    post: posts['all'][postId] || null,
-    comments: postComments.map((comment) => (comments['all'][comment])) || null
+    category,
+    post,
+    comments: postComments.map((comment) => (comments['all'][comment])) || null,
   }
 }
 const mapDispatchToProps = (dispatch) => {
