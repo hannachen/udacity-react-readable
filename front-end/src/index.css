@@ -1,193 +1,84 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
-}
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif; }
+
+a {
+  text-decoration: none; }
 
 ul {
-  padding-left: 0;
-}
+  padding-left: 0; }
 
 li {
-  list-style-type: none;
-}
+  list-style-type: none; }
 
-.container {
-  margin: 0 auto;
-  max-width: 1070px;
-  padding: 20px;
-  min-width: 1070px;
-}
-
-.header {
-  font-size: 50px;
-  font-weight: 300;
-  margin: 10px 0;
-}
-
-.subheader {
-  font-size: 30px;
-  font-weight: 300;
-}
-
-.icon-btn {
-  background: none;
-  border: none;
-}
-
-.nav {
+nav {
+  background-color: #4A4A4A;
+  padding: .5em;
+  height: 2em;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  align-items: center; }
+  nav h1,
+  nav a {
+    color: #F7F7F7; }
+  nav a,
+  nav svg,
+  nav .text {
+    display: flex;
+    align-items: center; }
+  nav h1 {
+    font-size: 1.25em;
+    font-weight: normal; }
+  nav .text {
+    padding: 0 0 0 .25em; }
 
-.shopping-list {
-  background: none;
-  font-size: 18px;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
-}
+.app {
+  padding: 0 .75em; }
 
-.calendar {
-  margin-top: 0;
+.category-page header {
   display: flex;
-}
+  justify-content: space-between; }
+  .category-page header .new-post-link {
+    display: flex;
+    align-self: center; }
 
-.icon-grid ul {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.icon-grid {
-  flex: 1;
-}
-
-.meal-types {
-  display: flex;
-  justify-content: space-around;
-  margin: 0;
-  margin-left: 152px;
-}
-
-.meal {
-  font-size: 23px;
-  display: flex;
-  flex-direction: column;
-  height: 150px;
-  width: 100px;
-  justify-content: center;
-}
-
-.meal svg {
-  margin: 0 auto;
+.category-page em,
+.category-page strong {
   display: block;
-  margin-top: 15px;
-  cursor: pointer;
-}
+  font-style: normal;
+  line-height: 100%; }
 
-.overlay {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  background-color: rgba(255, 255, 255, 0.75);
-}
+.category-page em {
+  font-weight: normal;
+  font-size: .35em;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: #4A4A4A; }
 
-.modal {
-  position: absolute;
-  top: 40px;
-  left: 200px;
-  right: 200px;
-  bottom: 40px;
-  border: 1px solid rgb(204, 204, 204);
-  background: rgb(255, 255, 255);
-  overflow: auto;
-  border-radius: 4px;
-  outline: none;
-  padding: 20px;
-  border-radius: 3px;
-  box-shadow: 0 3px 8px 0 rgba(0,0,0,.24), 0 3px 12px 0 rgba(0,0,0,.12);
-  min-width: 500px;
-}
-
-.search-container h3 {
-  text-align: center;
-}
-
-.food-input {
-  width: 90%;
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #bdbdbd;
-  outline: none;
-}
-
-.search {
+.post-list li,
+.post-list .post-link,
+.post-list .title-container {
   display: flex;
-}
+  align-items: center; }
 
-.loading {
-  align-self: center;
-  margin: 0 auto;
-}
+.post-list li {
+  background-color: #F7F7F7;
+  margin-bottom: .5em;
+  padding: 0 .5em;
+  min-height: 3em; }
 
-.days h3 {
-  padding: 50px 0;
-}
+.post-list .post-link {
+  flex-grow: 1;
+  align-items: stretch; }
 
-.food-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.food-list li {
-  display: flex;
+.post-list .title-container {
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  cursor: pointer;
-}
+  align-items: stretch; }
 
-.food-list img {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
-  border-radius: 3px;
-}
+.post-list .author {
+  font-size: .75em; }
 
-.ingredients-list {
+.post-list .comments {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.ingredients-list li {
-  font-size: 24px;
-  padding: 5px;
-}
-
-.food-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.food-item img {
-  width: 100px;
-  height: 100px;
-  border-radius: 3px;
-}
-
-.food-item button {
-  background: none;
-  border: none;
-  text-decoration: underline;
-  font-size: 14px;
-  margin-top: 5px;
-}
+  margin-left: auto;
+  align-items: center; }

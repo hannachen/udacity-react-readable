@@ -25,11 +25,14 @@ class CategoryPage extends Component {
   render() {
     const { category, posts } = this.props
     return (
-      <div className='category'>
-        <h1>{category}</h1>
-        <ul>
-          <li><Link to={`/post/new/${category}`}>Add Post</Link></li>
-        </ul>
+      <div className='category-page'>
+        <header>
+          <h1>
+            <em>Category</em>
+            <strong>{category}</strong>
+          </h1>
+          <Link className="new-post-link" to={`/post/new/${category}`}>Add Post</Link>
+        </header>
         {posts &&
           <PostList posts={posts} />
         }

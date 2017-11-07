@@ -9,7 +9,7 @@ export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const SCORE_COMMENT = 'SCORE_COMMENT'
 
-// CATEGORIES}
+// CATEGORIES
 export function fetchCategories(categories) {
   return {
     type: FETCH_CATEGORIES,
