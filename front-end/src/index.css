@@ -99,3 +99,47 @@ header {
   display: flex;
   margin-left: auto;
   align-items: center; }
+
+.comments-list {
+  margin: 0 -.75em;
+  background-color: #F7F7F7; }
+  .comments-list nav {
+    background: none;
+    display: flex;
+    align-items: center;
+    padding: .75em 1.5em; }
+  .comments-list ul {
+    margin: 0 .75em; }
+  .comments-list h3 {
+    margin: 0; }
+
+.comment-container {
+  display: flex;
+  padding: 1em 0;
+  border-top: 1px solid #4A4A4A; }
+  .comment-container .votescore-container {
+    display: flex;
+    align-items: stretch;
+    padding: 0 .5em 0 0;
+    border-right: 1px solid #4A4A4A; }
+  .comment-container .votescore {
+    display: flex;
+    min-width: 1.75em;
+    font-size: 2.5em;
+    font-weight: 400;
+    padding: 0 .15em 0 0;
+    justify-content: center; }
+  .comment-container .vote-buttons {
+    margin: 0; }
+    .comment-container .vote-buttons .upvote,
+    .comment-container .vote-buttons .downvote {
+      border: 0;
+      padding: 0;
+      background: none; }
+  .comment-container .comment,
+  .comment-container .comment-form {
+    padding: 0 0 0 .5em; }
+  .comment-container .author {
+    margin: 0; }
+  .comment-container .timestamp {
+    font-size: .75em; }

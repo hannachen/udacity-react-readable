@@ -2,7 +2,6 @@ import React  from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Nav ({ category, post }) {
-  console.log(category)
   return (
     <div className='breadcrumb'>
       <nav className='category-nav'>

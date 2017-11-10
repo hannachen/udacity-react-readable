@@ -45,7 +45,7 @@ class AddPostPage extends Component {
 
     const { newPost } = this.props
     const { post } = this.state
-    const timestamp = Math.floor(Date.now() / 1000)
+    const timestamp = Date.now()
     const data = {
       post,
       timestamp

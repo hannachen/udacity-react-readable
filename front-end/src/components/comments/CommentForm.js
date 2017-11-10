@@ -23,8 +23,6 @@ class CommentForm extends Component {
         </h3>
         <button onClick={onClose}>Close form</button>
         <form>
-          <p>{comment.voteScore}</p>
-          <p>{comment.timestamp}</p>
           <input name='author' readOnly={true} value={comment.author} />
           <textarea name='body' onChange={onChange} value={comment.body} />
           <button

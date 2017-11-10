@@ -10,12 +10,12 @@ export default function CommentList ({ post, comments }) {
   })
   return (
     <div className='comments-list'>
-      <h3 className='subheader'>
-        Comments
-      </h3>
-      <Link to={`/comment/new/${post.id}`}>
-        Add comment
-      </Link>
+      <nav className='comments-nav'>
+        <h3 className='subheader'>Comments</h3>
+        <Link to={`/comment/new/${post.id}`}>
+          Add comment
+        </Link>
+      </nav>
       <ul>
         {sortedComments.map((comment) => (
           <Comment key={comment.id} comment={comment} />

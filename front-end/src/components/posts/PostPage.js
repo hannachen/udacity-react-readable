@@ -40,8 +40,7 @@ class PostPage extends Component {
     return (
       <div className='post-page'>
         <Nav category={category} post={post} />
-        <p>{post.commentCount} comments</p>
-        <p>{post.author}</p>
+        <p>By: {post.author}</p>
         <p>{post.body}</p>
 
         {comments &&

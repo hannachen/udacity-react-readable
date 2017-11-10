@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
+import UpVoteIcon from 'react-icons/lib/ti/arrow-sorted-up'
+import DownVoteIcon from 'react-icons/lib/ti/arrow-sorted-down'
 import { editComment, scoreComment, deleteComment } from '../../actions'
 import api from '../../utils/api'
 import CommentForm from './CommentForm'
@@ -80,17 +83,28 @@ class Comment extends Component {
 
   render() {
     const { editing, voting, comment } = this.state
+    const formattedDate = moment.unix(comment.timestamp/1000).format("MMMM DD, YYYY hh:mma")
 
     if (comment.deleted) {
       return null
     }
     return (
       <li className='comment-container'>
-        <ul>
-          <li><button onClick={this.upVote} disabled={voting} className='upvote'>Upvote</button></li>
-          <li><button onClick={this.downVote} disabled={voting} className='downvote'>Downvote</button></li>
-        </ul>
-        <div className="votescore">{comment.voteScore}</div>
+        <div className='votescore-container'>
+          <div className="votescore">{comment.voteScore}</div>
+          <ul className='vote-buttons'>
+            <li>
+              <button onClick={this.upVote} disabled={voting} className='upvote'>
+                <UpVoteIcon size={24} />
+              </button>
+            </li>
+            <li>
+              <button onClick={this.downVote} disabled={voting} className='downvote'>
+                <DownVoteIcon size={24} />
+              </button>
+            </li>
+          </ul>
+        </div>
         {editing ?
           (<CommentForm comment={comment} onChange={this.onChange} onSubmit={this.onSubmit} onClose={this.toggleForm} />)
           :
@@ -98,6 +112,7 @@ class Comment extends Component {
             <div className="comment">
               <p className="author">Author: {comment.author}</p>
               <p className="body">{comment.body}</p>
+              <p className="timestamp">{formattedDate}</p>
               <button onClick={this.toggleForm}>Edit</button>
               <button onClick={this.deleteComment}>Delete</button>
             </div>

@@ -44,7 +44,7 @@ class AddCommentPage extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    const timestamp = Math.floor(Date.now() / 1000)
+    const timestamp = Date.now()
     const { comment } = this.state
     const data = {
       ...comment,
