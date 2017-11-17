@@ -88,7 +88,7 @@ class Api {
   }
 
   static editComment(comment) {
-    const request = new Request(`http://localhost:3001/comments/${comment}`, {
+    const request = new Request(`http://localhost:3001/comments/${comment.id}`, {
       method: 'PUT',
       headers: this.requestHeaders(),
       body: JSON.stringify(comment),

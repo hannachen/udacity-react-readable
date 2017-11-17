@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
 import { addPost } from '../../actions'
 import Nav from '../Nav'
+import PostForm from './PostForm'
 import api from '../../utils/api'
 import './posts.css'
 
@@ -67,7 +68,7 @@ class AddPostPage extends Component {
   render() {
     const { categories } = this.props
     const { post, redirect } = this.state
-    const { id, title, body, author, category } = post
+    const { category } = post
     const currentCategory = categories[category]
 
     if (redirect) {
@@ -79,55 +80,7 @@ class AddPostPage extends Component {
           <Nav category={currentCategory} title='Create a new post' />
         }
         <div className='new-post'>
-          <form className='post-form'>
-            <input
-              type='hidden'
-              name='id'
-              defaultValue={id}
-            />
-            <input
-              type='hidden'
-              name='category'
-              defaultValue={category}
-            />
-            <div className='field'>
-              <label forHtml='input_author'>Author</label>
-              <input
-                id='input_author'
-                className='post-input'
-                type='text'
-                name='author'
-                value={author || ''}
-                onChange={this.onChange}
-              />
-            </div>
-            <div className='field'>
-              <label forHtml='input_author'>Title</label>
-              <input
-                id='input_title'
-                className='post-input'
-                type='text'
-                name='title'
-                value={title || ''}
-                onChange={this.onChange}
-              />
-            </div>
-            <div className='field'>
-              <label>Body:</label>
-              <textarea
-                className='post-input'
-                type='text'
-                name='body'
-                value={body || ''}
-                onChange={this.onChange}
-              />
-            </div>
-            <button
-              className='icon-btn'
-              onClick={this.onSubmit}>
-              Add Post
-            </button>
-          </form>
+          <PostForm post={post} submitCta='Add Post' onChange={this.onChange} onSubmit={this.onSubmit} />
         </div>
       </div>
     )

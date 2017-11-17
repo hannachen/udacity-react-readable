@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchPost, editPost } from '../../actions'
-import api from '../../utils/api'
+import Nav from '../Nav'
 import PostForm from './PostForm'
+import api from '../../utils/api'
 import './posts.css'
 
 class EditPostPage extends Component {
@@ -64,15 +65,20 @@ class EditPostPage extends Component {
   }
 
   render() {
+    const { categories } = this.props
     const { post, redirect } = this.state
+    const currentCategory = (post && post.category && categories) ? categories[post.category] : null
 
     if (redirect) {
       return <Redirect to={`/category/${post.category}`} />
     }
     return (
       <div className='post'>
+        {currentCategory &&
+          <Nav category={currentCategory} title='Editing post' />
+        }
         {post &&
-          <PostForm post={post} onChange={this.onChange} onSubmit={this.onSubmit} />
+          <PostForm post={post} submitCta='Edit Post' onChange={this.onChange} onSubmit={this.onSubmit} />
         }
       </div>
     )
@@ -82,7 +88,9 @@ class EditPostPage extends Component {
 const mapStateToProps = (state, ownProps) => {
   const { postId } = ownProps.match.params
   const post = state.posts['all'][postId] || null
+  const { categories } = state
   return {
+    categories,
     post
   }
 }

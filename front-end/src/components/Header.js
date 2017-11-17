@@ -22,7 +22,7 @@ class Header extends Component {
   }
   isHomepage() {
     const { history } = this.props
-    return history.location.pathname === '/'
+    return history.location && history.location.pathname === '/'
   }
 
   render() {

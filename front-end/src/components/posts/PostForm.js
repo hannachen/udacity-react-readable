@@ -1,44 +1,58 @@
 import React  from 'react'
 
-export default function PostForm ({ post, onChange, onSubmit }) {
-  const { id, title, body, category } = post
+export default function PostForm ({ post, submitCta, onChange, onSubmit }) {
+  const { id, author, title, body, category } = post
 
   return (
-    <div className='edit-post'>
-      <h1 className="title">Edit post <strong>{category}</strong></h1>
-      <form>
+    <form className='post-form'>
+      <input
+        type='hidden'
+        name='id'
+        defaultValue={id}
+      />
+      <input
+        type='hidden'
+        name='category'
+        defaultValue={category}
+      />
+      <div className='field'>
+        <label forhtml='input_author'>Author</label>
         <input
-          type='hidden'
-          name='id'
-          defaultValue={id}
-        />
-        <input
-          type='hidden'
-          name='category'
-          defaultValue={category}
-        />
-        <input
+          id='input_author'
           className='post-input'
           type='text'
-          placeholder='Title'
+          name='author'
+          value={author || ''}
+          onChange={onChange}
+        />
+      </div>
+      <div className='field'>
+        <label forhtml='input_author'>Title</label>
+        <input
+          id='input_title'
+          className='post-input'
+          type='text'
           name='title'
           value={title || ''}
           onChange={onChange}
         />
+      </div>
+      <div className='field'>
+        <label forhtml='input_body'>Body:</label>
         <textarea
+          id='input_body'
           className='post-input'
           type='text'
-          placeholder='Body'
           name='body'
           value={body || ''}
           onChange={onChange}
         />
-        <button
-          className='icon-btn'
-          onClick={onSubmit}>
-          Edit Post
-        </button>
-      </form>
-    </div>
+      </div>
+      <button
+        className='icon-btn'
+        onClick={onSubmit}>
+        {submitCta}
+      </button>
+    </form>
   )
 }

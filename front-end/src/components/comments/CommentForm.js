@@ -29,7 +29,7 @@ class CommentForm extends Component {
           <input name='author' readOnly={true} value={`By: ${comment.author}`} />
           <textarea name='body' onChange={onChange} value={comment.body} />
           <button
-            className='icon-btn'
+            className='edit-btn'
             onClick={onSubmit}>
             Edit Comment
           </button>
