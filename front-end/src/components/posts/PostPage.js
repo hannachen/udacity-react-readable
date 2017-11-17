@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchPost, fetchComments } from '../../actions'
 import api from '../../utils/api'
@@ -40,8 +39,10 @@ class PostPage extends Component {
     return (
       <div className='post-page'>
         <Nav category={category} post={post} />
-        <p>By: {post.author}</p>
-        <p>{post.body}</p>
+        <div className='post'>
+          <p className='author'>By: {post.author}</p>
+          <p>{post.body}</p>
+        </div>
 
         {comments &&
           <CommentsList post={post} comments={comments} />

@@ -4,9 +4,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
+import { fetchCategories } from './actions'
 import App from './components/App'
-import Layout from './components/Layout'
 import thunk from 'redux-thunk'
+import api from './utils/api'
 import './index.css'
 
 const logger = store => next => action => {
@@ -28,9 +29,16 @@ const store = createStore(
   )
 )
 
+function getCategories() {
+  api.fetchCategories()
+    .then((categories) => {
+      store.dispatch(fetchCategories(categories))
+    })
+}
+
+getCategories()
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <Layout><App /></Layout>
-    </Router>
+    <Router><App /></Router>
   </Provider>, document.getElementById('root'))

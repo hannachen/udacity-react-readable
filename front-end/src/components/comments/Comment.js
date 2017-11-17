@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import UpVoteIcon from 'react-icons/lib/ti/arrow-sorted-up'
-import DownVoteIcon from 'react-icons/lib/ti/arrow-sorted-down'
+import UpVoteIcon from 'react-icons/lib/go/triangle-up'
+import DownVoteIcon from 'react-icons/lib/go/triangle-down'
+import TrashIcon from 'react-icons/lib/go/trashcan'
+import EditIcon from 'react-icons/lib/go/pencil'
 import { editComment, scoreComment, deleteComment } from '../../actions'
 import api from '../../utils/api'
 import CommentForm from './CommentForm'
@@ -76,9 +78,6 @@ class Comment extends Component {
       .then(() => {
         deleteComment(comment)
       })
-      .then((comment) => this.setState(() => ({
-        comment
-      })))
   }
 
   render() {
@@ -95,12 +94,12 @@ class Comment extends Component {
           <ul className='vote-buttons'>
             <li>
               <button onClick={this.upVote} disabled={voting} className='upvote'>
-                <UpVoteIcon size={24} />
+                <UpVoteIcon size={20} />
               </button>
             </li>
             <li>
               <button onClick={this.downVote} disabled={voting} className='downvote'>
-                <DownVoteIcon size={24} />
+                <DownVoteIcon size={20} />
               </button>
             </li>
           </ul>
@@ -110,11 +109,17 @@ class Comment extends Component {
           :
           (
             <div className="comment">
-              <p className="author">Author: {comment.author}</p>
+              <div className='comment-header'>
+                <p className="author">Author: {comment.author}</p>
+                <p className="timestamp">{formattedDate}</p>
+              </div>
               <p className="body">{comment.body}</p>
-              <p className="timestamp">{formattedDate}</p>
-              <button onClick={this.toggleForm}>Edit</button>
-              <button onClick={this.deleteComment}>Delete</button>
+              <button className='icon-btn' onClick={this.toggleForm}>
+                <EditIcon size={20} />
+              </button>
+              <button className='icon-btn' onClick={this.deleteComment}>
+                <TrashIcon size={20} />
+              </button>
             </div>
           )
         }

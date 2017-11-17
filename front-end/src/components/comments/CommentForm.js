@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CloseIcon from 'react-icons/lib/go/x'
 
 class CommentForm extends Component {
   state = {
@@ -18,12 +19,14 @@ class CommentForm extends Component {
 
     return (
       <div className='comment-form'>
-        <h3 className='subheader'>
-          Edit Comment
-        </h3>
-        <button onClick={onClose}>Close form</button>
+        <h4 className='subheader'>
+          <span>Edit Comment</span>
+          <button className='icon-btn' onClick={onClose}>
+            <CloseIcon size={20} />
+          </button>
+        </h4>
         <form>
-          <input name='author' readOnly={true} value={comment.author} />
+          <input name='author' readOnly={true} value={`By: ${comment.author}`} />
           <textarea name='body' onChange={onChange} value={comment.body} />
           <button
             className='icon-btn'

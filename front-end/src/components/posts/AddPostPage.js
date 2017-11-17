@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
 import { addPost } from '../../actions'
+import Nav from '../Nav'
 import api from '../../utils/api'
 import './posts.css'
 
@@ -35,6 +36,11 @@ class AddPostPage extends Component {
       }
     }
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    const { categories } = this.props
+    const { post } = this.state
+    return nextProps.categories !== categories || nextState !== post
+  }
   onChange(e) {
     const { post } = this.state
     post[e.target.name] = e.target.value
@@ -59,63 +65,79 @@ class AddPostPage extends Component {
   }
 
   render() {
+    const { categories } = this.props
     const { post, redirect } = this.state
     const { id, title, body, author, category } = post
+    const currentCategory = categories[category]
 
     if (redirect) {
       return <Redirect to={`/category/${category}`} />;
     }
     return (
       <div className='post'>
-        <h1 className="title">Add a post to category: <strong>{category}</strong></h1>
+        {currentCategory &&
+          <Nav category={currentCategory} title='Create a new post' />
+        }
         <div className='new-post'>
-          <input
-            type='hidden'
-            name='id'
-            defaultValue={id}
-          />
-          <input
-            type='hidden'
-            name='category'
-            defaultValue={category}
-          />
-          <input
-            className='post-input'
-            type='text'
-            placeholder='Author'
-            name='author'
-            value={author || ''}
-            onChange={this.onChange}
-          />
-          <input
-            className='post-input'
-            type='text'
-            placeholder='Title'
-            name='title'
-            value={title || ''}
-            onChange={this.onChange}
-          />
-          <textarea
-            className='post-input'
-            type='text'
-            placeholder='Body'
-            name='body'
-            value={body || ''}
-            onChange={this.onChange}
-          />
-          <button
-            className='icon-btn'
-            onClick={this.onSubmit}>
-            Add Post
-          </button>
+          <form className='post-form'>
+            <input
+              type='hidden'
+              name='id'
+              defaultValue={id}
+            />
+            <input
+              type='hidden'
+              name='category'
+              defaultValue={category}
+            />
+            <div className='field'>
+              <label forHtml='input_author'>Author</label>
+              <input
+                id='input_author'
+                className='post-input'
+                type='text'
+                name='author'
+                value={author || ''}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className='field'>
+              <label forHtml='input_author'>Title</label>
+              <input
+                id='input_title'
+                className='post-input'
+                type='text'
+                name='title'
+                value={title || ''}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className='field'>
+              <label>Body:</label>
+              <textarea
+                className='post-input'
+                type='text'
+                name='body'
+                value={body || ''}
+                onChange={this.onChange}
+              />
+            </div>
+            <button
+              className='icon-btn'
+              onClick={this.onSubmit}>
+              Add Post
+            </button>
+          </form>
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = ({ categories }) => {
+  return {
+    categories
+  }
 }
 const mapDispatchToProps = (dispatch) => {
   return {

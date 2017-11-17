@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { fetchCategories } from '../actions'
-import api from '../utils/api'
+import { Link, withRouter } from 'react-router-dom'
 import HomeIcon from 'react-icons/lib/ti/home'
 
 class Header extends Component {
@@ -12,18 +9,20 @@ class Header extends Component {
   constructor(props, context) {
     super(props, context)
 
-    this.getCategories()
-  }
-  componentWillReceiveProps(nextProps) {
-    const { location } = nextProps
-    this.setState({
-      homepage: location.pathname === '/'
+    const { history } = this.props
+    history.listen(() => {
+      this.setState({
+        homepage: this.isHomepage()
+      })
     })
+    this.state = {
+      homepage: this.isHomepage()
+    }
+    this.isHomepage = this.isHomepage.bind(this)
   }
-  getCategories() {
-    const { getCategories } = this.props
-    api.fetchCategories()
-      .then(getCategories)
+  isHomepage() {
+    const { history } = this.props
+    return history.location.pathname === '/'
   }
 
   render() {
@@ -42,19 +41,4 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, path }) => {
-  return {
-    categories: categories,
-    path: path
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getCategories: (categories) => dispatch(fetchCategories(categories)),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header)
+export default withRouter(Header)

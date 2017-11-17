@@ -4,11 +4,11 @@ export const categories = (state = {}, action) => {
   switch(action.type) {
     case types.FETCH_CATEGORIES:
       const { categories } = action
-      const test = (categories.categories).reduce((cats = {}, cat) => {
+      const newState = (categories.categories).reduce((cats = {}, cat) => {
         cats[cat.path] = cat
         return cats
       }, {})
-      return test
+      return newState
     default:
       return state
   }

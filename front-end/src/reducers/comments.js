@@ -54,10 +54,9 @@ export const comments = (state = initialState, action) => {
       const newState = {
         ...state,
         'byPost': {
-          ...state['byPost'],
           [comment.parentId]:
-            state['byPost'][comment.parentId].filter((comment) => {
-              return comment !== comment.id
+            state['byPost'][comment.parentId].filter((commentId) => {
+              return commentId !== comment.id
             })
         },
       }

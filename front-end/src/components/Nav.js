@@ -1,17 +1,23 @@
 import React  from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Nav ({ category, post }) {
+export default function Nav ({ category, post, title }) {
+
+  const categoryName = (post || title) ? <Link to={`/category/${category.path}`}>{category.name}</Link> : <strong>{category.name}</strong>
   return (
     <div className='breadcrumb'>
       <nav className='category-nav'>
         <h1>
           <em>Category</em>
-          <strong>{category.name}</strong>
+          {categoryName}
         </h1>
-        <Link className="new-item-link" to={`/post/new/${category.path}`}>
-          Add Post
-        </Link>
+        {title ?
+          <h2 class='subtitle'>{title}</h2>
+          :
+          <Link className="new-item-link" to={`/post/new/${category.path}`}>
+            Add Post
+          </Link>
+        }
       </nav>
       {post &&
         <nav className='post-nav'>
@@ -19,9 +25,13 @@ export default function Nav ({ category, post }) {
             <em>Post</em>
             <strong>{post.title}</strong>
           </h1>
-          <Link className='new-item-link' to={`/post/edit/${post.id}`}>
-            Edit Post
-          </Link>
+          {title ?
+            <h2 class='subtitle'>{title}</h2>
+            :
+            <Link className='new-item-link' to={`/post/edit/${post.id}`}>
+              Edit Post
+            </Link>
+          }
         </nav>
       }
     </div>
