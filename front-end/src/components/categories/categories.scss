@@ -1,0 +1,55 @@
+@import "../../variables.scss";
+
+.category-list,
+.post-list {
+  h3 {
+    line-height: 100%;
+    margin: 0;
+  }
+  li,
+  .item-link,
+  .title-container {
+    display: flex;
+    align-items: center;
+  }
+  li {
+    background-color: $color-amazonite;
+    margin-bottom: .5em;
+    min-height: 3em;
+  }
+  .item-link {
+    color: $color-outer-space;
+    flex-grow: 1;
+    align-items: stretch;
+    padding: 1em .75em;
+  }
+  .title-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .title {
+    font-weight: bold;
+  }
+  .author {
+    font-size: .75em;
+  }
+  .posts,
+  .comments {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+  }
+}
+.post-list {
+  li {
+    background-color: $color-tiffany-blue;
+  }
+  .item-link {
+    color: $color-outer-space;
+  }
+}
+
+.category-page {
+  nav {
+  }
+}

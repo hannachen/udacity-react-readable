@@ -77,7 +77,7 @@ class AddPostPage extends Component {
     return (
       <div className='post'>
         {currentCategory &&
-          <Nav category={currentCategory} title='Create a new post' />
+          <Nav category={currentCategory} title='Adding a new post' />
         }
         <div className='new-post'>
           <PostForm post={post} submitCta='Add Post' onChange={this.onChange} onSubmit={this.onSubmit} />

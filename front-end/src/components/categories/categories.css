@@ -1,0 +1,53 @@
+.category-list h3,
+.post-list h3 {
+  line-height: 100%;
+  margin: 0; }
+
+.category-list li,
+.category-list .item-link,
+.category-list .title-container,
+.post-list li,
+.post-list .item-link,
+.post-list .title-container {
+  display: flex;
+  align-items: center; }
+
+.category-list li,
+.post-list li {
+  background-color: #00CEAF;
+  margin-bottom: .5em;
+  min-height: 3em; }
+
+.category-list .item-link,
+.post-list .item-link {
+  color: #4A4A4A;
+  flex-grow: 1;
+  align-items: stretch;
+  padding: 1em .75em; }
+
+.category-list .title-container,
+.post-list .title-container {
+  flex-direction: column;
+  align-items: stretch; }
+
+.category-list .title,
+.post-list .title {
+  font-weight: bold; }
+
+.category-list .author,
+.post-list .author {
+  font-size: .75em; }
+
+.category-list .posts,
+.category-list .comments,
+.post-list .posts,
+.post-list .comments {
+  display: flex;
+  margin-left: auto;
+  align-items: center; }
+
+.post-list li {
+  background-color: #09BFBF; }
+
+.post-list .item-link {
+  color: #4A4A4A; }

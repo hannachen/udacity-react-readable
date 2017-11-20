@@ -1,4 +1,5 @@
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
+export const FETCH_ALL_POSTS = 'FETCH_ALL_POSTS'
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const GET_POST = 'GET_POST'
@@ -18,6 +19,12 @@ export function fetchCategories(categories) {
 }
 
 // POSTS
+export function fetchAllPosts(posts) {
+  return {
+    type: FETCH_ALL_POSTS,
+    posts: posts,
+  }
+}
 export function fetchPosts({ category, posts }) {
   return {
     type: FETCH_POSTS,

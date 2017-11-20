@@ -6,10 +6,32 @@ const initialState = {
 }
 
 export const posts = (state = initialState, action) => {
+  const { posts } = action
+  let namedPosts = {}
   switch(action.type) {
+    case types.FETCH_ALL_POSTS:
+      posts.forEach((post) => {
+        namedPosts[post.id] = post
+      })
+      const categoryPosts = posts.reduce((allPosts = [], post) => {
+        if (!allPosts[post.category]) {
+          allPosts[post.category] = []
+        }
+        allPosts[post.category].push(post.id)
+        return allPosts
+      }, {})
+      return {
+        ...state,
+        'byCategory': {
+          ...categoryPosts
+        },
+        'all': {
+          ...state['all'],
+          ...namedPosts
+        }
+      }
     case types.FETCH_POSTS:
-      const { category, posts } = action
-      let namedPosts = {}
+      const { category } = action
       posts.forEach((post) => {
         namedPosts[post.id] = post
       })
@@ -26,12 +48,12 @@ export const posts = (state = initialState, action) => {
       }
     case types.GET_POST:
       const { post } = action
-      const categoryPosts = state['byCategory'][post.category] || []
+      const byCategory = state['byCategory'][post.category] || []
       return {
         ...state,
         'byCategory': {
           ...state['byCategory'],
-          [post.category]: Array.from(new Set(categoryPosts.concat(post.id))),
+          [post.category]: Array.from(new Set(byCategory.concat(post.id))),
         },
         'all': {
           ...state['all'],

@@ -2,6 +2,7 @@ import React  from 'react'
 import { Link } from 'react-router-dom'
 import Comment from './Comment'
 import ArrowIcon from 'react-icons/lib/md/reply'
+import './comments.css'
 
 export default function CommentList ({ post, comments }) {
 

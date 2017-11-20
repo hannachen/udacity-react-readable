@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
-import { fetchCategories } from './actions'
+import { fetchCategories, fetchAllPosts } from './actions'
 import App from './components/App'
 import thunk from 'redux-thunk'
 import api from './utils/api'
@@ -36,7 +36,15 @@ function getCategories() {
     })
 }
 
+function getPosts() {
+  api.fetchAllPosts()
+    .then((posts) => {
+      store.dispatch(fetchAllPosts(posts))
+    })
+}
+
 getCategories()
+getPosts()
 
 ReactDOM.render(
   <Provider store={store}>

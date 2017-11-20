@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
+import Nav from '../Nav'
 import { addComment } from '../../actions'
 import api from '../../utils/api'
 
@@ -36,6 +37,11 @@ class AddCommentPage extends Component {
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    const { posts } = this.props
+    const { comment } = this.state
+    return nextProps.posts !== posts || nextState !== comment
+  }
   onChange(e) {
     const { comment } = this.state
     comment[e.target.name] = e.target.value
@@ -60,57 +66,78 @@ class AddCommentPage extends Component {
   }
 
   render() {
+    const { categories, post } = this.props
     const { postId, comment, redirect } = this.state
     const { id, body, author, parentId } = comment
+    const currentCategory = (categories && post && categories[post.category]) ? categories[post.category] : ''
 
     if (redirect) {
       return <Redirect to={`/post/view/${postId}`} />;
     }
     return (
-      <div className='post'>
-        <h1 className="title">Add a post to <strong>{postId}</strong></h1>
-        <div className='new-post'>
-          <input
-            type='hidden'
-            name='id'
-            defaultValue={id}
-          />
-          <input
-            type='hidden'
-            name='parentId'
-            defaultValue={parentId}
-          />
-          <input
-            className='post-input'
-            type='text'
-            placeholder='Author'
-            name='author'
-            value={author || ''}
-            onChange={this.onChange}
-          />
-          <textarea
-            className='post-input'
-            type='text'
-            placeholder='Body'
-            name='body'
-            value={body || ''}
-            onChange={this.onChange}
-          />
-          <button
-            className='icon-btn'
-            onClick={this.onSubmit}>
-            Add Comment
-          </button>
-        </div>
+      <div className='new-comment'>
+        {currentCategory &&
+          <Nav category={currentCategory} post={post} title='Adding a new comment' />
+        }
+        {post ?
+          <div className='new-post'>
+            <div className='post'>
+              <p className='author'>By: {post.author}</p>
+              <p>{post.body}</p>
+            </div>
+            <form className='comment-form'>
+              <input
+                type='hidden'
+                name='id'
+                defaultValue={id}
+              />
+              <input
+                type='hidden'
+                name='parentId'
+                defaultValue={parentId}
+              />
+              <div className='field'>
+                <label forhtml='input_author'>Author</label>
+                <input
+                  id='input_author'
+                  className='post-input'
+                  type='text'
+                  name='author'
+                  value={author || ''}
+                  onChange={this.onChange}
+                />
+              </div>
+              <div className='field'>
+                <label forhtml='input_comment'>Comment</label>
+                <textarea
+                  id='input_comment'
+                  className='post-input'
+                  type='text'
+                  name='body'
+                  value={body || ''}
+                  onChange={this.onChange}
+                />
+              </div>
+              <button
+                className='icon-btn'
+                onClick={this.onSubmit}>
+                Add Comment
+              </button>
+            </form>
+          </div>
+          :
+          <p>Post not found.</p>
+        }
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { postId } = ownProps
-  const post = state.posts['all'][postId] || null
+const mapStateToProps = ({ categories, posts }, ownProps) => {
+  const { postId } = ownProps.match.params
+  const post = posts['all'][postId] || null
   return {
+    categories,
     post
   }
 }

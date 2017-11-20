@@ -19,6 +19,18 @@ class Api {
       })
   }
 
+  static fetchAllPosts() {
+    const request = new Request(`http://localhost:3001/posts`, {
+      method: 'GET',
+      headers: this.requestHeaders(),
+    })
+    return fetch(request)
+      .then((res) => res.json())
+      .catch((error) => {
+        return error
+      })
+  }
+
   static fetchPosts(category = '') {
     category = category.trim()
     const request = new Request(`http://localhost:3001/${category}/posts`, {
@@ -125,12 +137,6 @@ class Api {
       .catch((error) => {
         return error
       })
-  }
-
-  static fetchAllPosts() {
-    return fetch(`http://localhost:3001/posts`)
-      .then((res) => res.json())
-      .then(({ hits }) => hits.map(({ posts }) => posts))
   }
 }
 

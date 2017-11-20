@@ -1,0 +1,53 @@
+@import "../../variables.scss";
+
+.post-page {
+  .category-nav {
+    h1,
+    a {
+      opacity: .5;
+    }
+    h1 {
+      margin: .5em 0;
+      font-size: 1em;
+    }
+  }
+  .post-nav {
+    background-color: $color-tiffany-blue;
+  }
+  .post {
+    padding: 1em 0;
+  }
+  .author {
+    font-size: .75em;
+  }
+}
+.post-list {
+  .no-posts {
+    padding: 0 2.5em 1em 0;
+    text-align: right;
+    color: $color-outer-space;
+
+    svg {
+      transform: rotate(130deg) translateX(-10px) translateY(-10px);
+    }
+  }
+}
+.post-form,
+.comment-form {
+  .field,
+  .icon-btn {
+    margin: 1em 0;
+  }
+  label {
+    display: block;
+    padding: .5em 0;
+  }
+  .post-input {
+  }
+  .icon-btn {
+    font-size: 1em;
+    padding: .5em;
+    background-color: #eee;
+    border: 1px solid #ccc;
+  }
+}

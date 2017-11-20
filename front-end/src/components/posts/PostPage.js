@@ -4,7 +4,6 @@ import { fetchPost, fetchComments } from '../../actions'
 import api from '../../utils/api'
 import Nav from '../Nav'
 import CommentsList from '../comments/CommentList'
-import './posts.css'
 
 class PostPage extends Component {
   constructor(props, context) {

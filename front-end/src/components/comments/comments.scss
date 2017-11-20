@@ -1,0 +1,132 @@
+@import "../../variables.scss";
+
+.comments-list {
+  margin: 0 -.75em;
+  background-color: $color-white-smoke;
+  border-top: 1px solid $color-outer-space;
+
+  nav {
+    background: none;
+    display: flex;
+    align-items: center;
+    padding: .75em 1.5em;
+  }
+  ul {
+    margin: 0 .75em;
+  }
+  h4 {
+    margin: 0;
+  }
+  .new-comment-link {
+    font-size: .75em;
+    font-weight: bold;
+  }
+  .no-comments {
+    padding: 0 2.5em 1em 0;
+    text-align: right;
+    color: $color-outer-space;
+
+    svg {
+      transform: rotate(130deg) translateX(-10px) translateY(-10px);
+    }
+  }
+}
+.comment-container {
+  display: flex;
+  padding: 1em 0;
+  border-top: 1px solid rgba($color-outer-space, .15);
+
+  .votescore-container {
+    display: flex;
+    align-items: stretch;
+    padding: 0 .5em 0 0;
+    border-right: 1px solid rgba($color-outer-space, .15);
+  }
+  .votescore {
+    display: flex;
+    min-width: 1.75em;
+    font-size: 2.25em;
+    font-weight: 400;
+    padding: 0 .15em 0 0;
+    justify-content: center;
+  }
+  .vote-buttons {
+    margin: 0;
+
+    .upvote,
+    .downvote {
+      border: 0;
+      padding: 0;
+      background: none;
+    }
+  }
+  .comment,
+  .comment-form {
+    padding: 0 0 0 .5em;
+
+    .icon-btn {
+      background: none;
+      border: 0;
+    }
+  }
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .comment {
+    width: 100%;
+  }
+  .author,
+  .timestamp {
+    font-size: .75em;
+    margin: 0;
+  }
+  .timestamp {
+    color: $color-outer-space;
+  }
+}
+.new-comment {
+  .category-nav {
+    h1,
+    a {
+      opacity: .5;
+    }
+    h1 {
+      margin: .5em 0;
+      font-size: 1em;
+    }
+    .subtitle {
+      display: none;
+    }
+  }
+  .post-nav {
+    background-color: $color-tiffany-blue;
+  }
+  .post {
+    padding: 1em 0;
+  }
+}
+.comment-form {
+  width: 100%;
+
+  .subheader {
+    display: flex;
+    justify-content: space-between;
+  }
+  input,
+  textarea {
+    margin: .25em 0;
+    background-color: #fff;
+  }
+  input:read-only {
+    opacity: .5;
+  }
+  textarea {
+    height: 8em;
+  }
+  .edit-btn {
+    padding: .5em;
+    border: 1px solid rgba($color-outer-space, .5);
+    background-color: #ccc;
+  }
+}
