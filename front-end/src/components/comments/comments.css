@@ -5,6 +5,13 @@
   .edit-comment .new-comment {
     border-top: 1px solid rgba(74, 74, 74, 0.15); }
 
+.edit-comment {
+  width: 100%;
+  padding-right: 0; }
+  .edit-comment .subheader {
+    display: flex;
+    justify-content: space-between; }
+
 .comments-list {
   margin: 0 -.75em;
   background-color: #F7F7F7;
@@ -68,17 +75,16 @@
   .comment-container .timestamp {
     color: #4A4A4A; }
 
-.comment-form input,
-.comment-form textarea {
-  background-color: #fff; }
-
-.comment-form input:read-only {
-  opacity: .5; }
-
-.comment-form textarea {
-  height: 8em; }
-
-.comment-form .submit-btn {
-  padding: .5em;
-  border: 1px solid rgba(74, 74, 74, 0.5);
-  background-color: #ccc; }
+.comment-form {
+  padding: 0 0 1.5em 0; }
+  .comment-form input,
+  .comment-form textarea {
+    background-color: #fff; }
+  .comment-form input:read-only {
+    opacity: .5; }
+  .comment-form textarea {
+    height: 8em; }
+  .comment-form .submit-btn {
+    padding: .5em;
+    border: 1px solid rgba(74, 74, 74, 0.5);
+    background-color: #ccc; }

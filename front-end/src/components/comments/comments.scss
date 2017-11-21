@@ -8,6 +8,15 @@
     border-top: 1px solid rgba($color-outer-space, .15);
   }
 }
+.edit-comment {
+  width: 100%;
+  padding-right: 0;
+
+  .subheader {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 .comments-list {
   margin: 0 -.75em;
   background-color: $color-white-smoke;
@@ -91,6 +100,8 @@
   }
 }
 .comment-form {
+  padding: 0 0 1.5em 0;
+
   input,
   textarea {
     background-color: #fff;

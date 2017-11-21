@@ -70,15 +70,15 @@ class EditPostPage extends Component {
     const currentCategory = (post && post.category && categories) ? categories[post.category] : null
 
     if (redirect) {
-      return <Redirect to={`/category/${post.category}`} />
+      return <Redirect to={`/post/view/${post.id}`} />;
     }
     return (
-      <div className='post'>
+      <div className='edit-post'>
         {currentCategory &&
           <Nav category={currentCategory} title='Editing post' />
         }
         {post &&
-          <PostForm post={post} submitCta='Edit Post' onChange={this.onChange} onSubmit={this.onSubmit} />
+          <PostForm post={post} submitCta='Edit Post' onChange={this.onChange} onSubmit={this.onSubmit} readOnly={['author']} />
         }
       </div>
     )

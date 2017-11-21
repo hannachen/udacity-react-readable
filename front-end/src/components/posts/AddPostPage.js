@@ -52,6 +52,7 @@ class AddPostPage extends Component {
 
     const { newPost } = this.props
     const { post } = this.state
+
     const timestamp = Date.now()
     const data = {
       post,
@@ -68,14 +69,14 @@ class AddPostPage extends Component {
   render() {
     const { categories } = this.props
     const { post, redirect } = this.state
-    const { category } = post
+    const { id, category } = post
     const currentCategory = categories[category]
 
     if (redirect) {
-      return <Redirect to={`/category/${category}`} />;
+      return <Redirect to={`/post/view/${id}`} />;
     }
     return (
-      <div className='post'>
+      <div className='add-post'>
         {currentCategory &&
           <Nav category={currentCategory} title='Adding a new post' />
         }

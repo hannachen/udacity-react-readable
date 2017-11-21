@@ -39,7 +39,7 @@ class PostPage extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, posts, comments }, ownProps) => {
+const mapStateToProps = ({ categories, posts }, ownProps) => {
   const { postId } = ownProps.match.params
   const post = posts['all'][postId] || null
   const category = post && post.category ? categories[post.category] : null
