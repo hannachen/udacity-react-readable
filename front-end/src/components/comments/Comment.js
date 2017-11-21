@@ -7,7 +7,7 @@ import TrashIcon from 'react-icons/lib/go/trashcan'
 import EditIcon from 'react-icons/lib/go/pencil'
 import { editComment, scoreComment, deleteComment } from '../../actions'
 import api from '../../utils/api'
-import CommentForm from './CommentForm'
+import EditComment from './EditComment'
 
 class Comment extends Component {
   state = {
@@ -105,7 +105,7 @@ class Comment extends Component {
           </ul>
         </div>
         {editing ?
-          (<CommentForm comment={comment} onChange={this.onChange} onSubmit={this.onSubmit} onClose={this.toggleForm} />)
+          (<EditComment comment={comment} onChange={this.onChange} onSubmit={this.onSubmit} onClose={this.toggleForm} />)
           :
           (
             <div className="comment">

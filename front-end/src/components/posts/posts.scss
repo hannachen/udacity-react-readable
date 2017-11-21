@@ -1,5 +1,12 @@
 @import "../../variables.scss";
 
+.post {
+  padding: 1em 0;
+
+  .author {
+    font-size: .75em;
+  }
+}
 .post-page {
   .category-nav {
     h1,
@@ -13,12 +20,6 @@
   }
   .post-nav {
     background-color: $color-tiffany-blue;
-  }
-  .post {
-    padding: 1em 0;
-  }
-  .author {
-    font-size: .75em;
   }
 }
 .post-list {

@@ -1,3 +1,8 @@
+.post {
+  padding: 1em 0; }
+  .post .author {
+    font-size: .75em; }
+
 .post-page .category-nav h1,
 .post-page .category-nav a {
   opacity: .5; }
@@ -8,12 +13,6 @@
 
 .post-page .post-nav {
   background-color: #09BFBF; }
-
-.post-page .post {
-  padding: 1em 0; }
-
-.post-page .author {
-  font-size: .75em; }
 
 .post-list .no-posts {
   padding: 0 2.5em 1em 0;

@@ -6,7 +6,6 @@ import CategoryPage from './categories/CategoryPage'
 import AddPostPage from './posts/AddPostPage'
 import EditPostPage from './posts/EditPostPage'
 import PostPage from './posts/PostPage'
-import AddCommentPage from './comments/AddCommentPage'
 
 class App extends Component {
   render() {
@@ -22,7 +21,6 @@ class App extends Component {
           <Route path='/post/new/:categoryId' component={AddPostPage} />
           <Route path='/post/edit/:postId' component={EditPostPage} />
           <Route path='/post/view/:postId' component={PostPage} />
-          <Route path='/comment/new/:postId' component={AddCommentPage} />
         </div>
       </div>
     )

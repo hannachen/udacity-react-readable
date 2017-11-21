@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPost, fetchComments } from '../../actions'
+import { fetchPost } from '../../actions'
 import api from '../../utils/api'
 import Nav from '../Nav'
 import CommentsList from '../comments/CommentList'
@@ -9,9 +9,7 @@ class PostPage extends Component {
   constructor(props, context) {
     super(props, context)
     this.fetchPost()
-    this.fetchComments()
     this.fetchPost = this.fetchPost.bind(this)
-    this.fetchComments = this.fetchComments.bind(this)
   }
   fetchPost() {
     const { postId } = this.props.match.params
@@ -19,17 +17,9 @@ class PostPage extends Component {
     api.fetchPost(postId)
       .then(fetchPost)
   }
-  fetchComments() {
-    const { postId } = this.props.match.params
-    api.fetchPostComments(postId)
-      .then((comments) => {
-        const { fetchComments } = this.props
-        fetchComments({postId, comments})
-      })
-  }
 
   render() {
-    const { category, post, comments } = this.props
+    const { category, post } = this.props
     if (!post) {
       return (
         <div>Post not found</div>
@@ -43,9 +33,7 @@ class PostPage extends Component {
           <p>{post.body}</p>
         </div>
 
-        {comments &&
-          <CommentsList post={post} comments={comments} />
-        }
+        <CommentsList post={post} />
       </div>
     )
   }
@@ -53,19 +41,16 @@ class PostPage extends Component {
 
 const mapStateToProps = ({ categories, posts, comments }, ownProps) => {
   const { postId } = ownProps.match.params
-  const postComments = comments['byPost'][postId] || []
   const post = posts['all'][postId] || null
   const category = post && post.category ? categories[post.category] : null
   return {
     category,
     post,
-    comments: postComments.map((comment) => (comments['all'][comment])) || null,
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPost: (data) => dispatch(fetchPost(data)),
-    fetchComments: (data) => dispatch(fetchComments(data)),
   }
 }
 

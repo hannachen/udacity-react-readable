@@ -1,42 +1,61 @@
-import React, { Component } from 'react'
-import CloseIcon from 'react-icons/lib/go/x'
+import React from 'react'
 
-class CommentForm extends Component {
-  state = {
-    showForm: false,
-  }
-  constructor(props, context) {
-    super(props, context)
-    this.toggleForm = this.toggleForm.bind(this)
-  }
-  toggleForm() {
-    this.setState({
-      showForm: !this.state.showForm
-    })
-  }
-  render() {
-    const { comment, onChange, onSubmit, onClose } = this.props
+export default function CommentForm ({ comment, submitCta, onChange, onSubmit, readOnly: isReadOnly = [] }) {
 
-    return (
-      <div className='comment-form'>
-        <h4 className='subheader'>
-          <span>Edit Comment</span>
-          <button className='icon-btn' onClick={onClose}>
-            <CloseIcon size={20} />
-          </button>
-        </h4>
-        <form>
-          <input name='author' readOnly={true} value={`By: ${comment.author}`} />
-          <textarea name='body' onChange={onChange} value={comment.body} />
-          <button
-            className='edit-btn'
-            onClick={onSubmit}>
-            Edit Comment
-          </button>
-        </form>
+  const fields = ['author', 'body']
+
+  const { id, parentId, author, body } = comment
+
+  const readOnly = fields.reduce((fieldResults = [], field) => {
+    fieldResults[field] = isReadOnly.includes(field)
+    return fieldResults
+  }, [])
+
+  return (
+    <form className='comment-form'>
+      {comment && id &&
+        <input
+          type='hidden'
+          name='id'
+          defaultValue={id}
+        />
+      }
+      {comment && parentId &&
+        <input
+          type='hidden'
+          name='parentId'
+          defaultValue={parentId}
+        />
+      }
+      <div className='field'>
+        <label forhtml='input_author'>Author</label>
+        <input
+          id='input_author'
+          readOnly={readOnly['author']}
+          className='post-input'
+          type='text'
+          name='author'
+          value={author || ''}
+          onChange={onChange}
+        />
       </div>
-    )
-  }
+      <div className='field'>
+        <label forhtml='input_comment'>Comment</label>
+        <textarea
+          id='input_comment'
+          readOnly={readOnly['body']}
+          className='post-input'
+          type='text'
+          name='body'
+          value={body || ''}
+          onChange={onChange}
+        />
+      </div>
+      <button
+        className='submit-btn'
+        onClick={onSubmit}>
+        {submitCta}
+      </button>
+    </form>
+  )
 }
-
-export default CommentForm

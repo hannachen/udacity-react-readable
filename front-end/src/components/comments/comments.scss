@@ -1,5 +1,13 @@
 @import "../../variables.scss";
 
+.add-comment,
+.edit-comment {
+  padding: 0 .75em;
+
+  .new-comment {
+    border-top: 1px solid rgba($color-outer-space, .15);
+  }
+}
 .comments-list {
   margin: 0 -.75em;
   background-color: $color-white-smoke;
@@ -20,6 +28,7 @@
   .new-comment-link {
     font-size: .75em;
     font-weight: bold;
+    cursor: pointer;
   }
   .no-comments {
     padding: 0 2.5em 1em 0;
@@ -29,6 +38,10 @@
     svg {
       transform: rotate(130deg) translateX(-10px) translateY(-10px);
     }
+  }
+  .icon-btn {
+    background: none;
+    border: 0;
   }
 }
 .comment-container {
@@ -47,7 +60,7 @@
     min-width: 1.75em;
     font-size: 2.25em;
     font-weight: 400;
-    padding: 0 .15em 0 0;
+    padding: .35em .15em 0 0;
     justify-content: center;
   }
   .vote-buttons {
@@ -60,21 +73,13 @@
       background: none;
     }
   }
-  .comment,
-  .comment-form {
-    padding: 0 0 0 .5em;
-
-    .icon-btn {
-      background: none;
-      border: 0;
-    }
-  }
   .comment-header {
     display: flex;
     justify-content: space-between;
   }
   .comment {
     width: 100%;
+    padding: 0 0 0 .5em;
   }
   .author,
   .timestamp {
@@ -85,37 +90,9 @@
     color: $color-outer-space;
   }
 }
-.new-comment {
-  .category-nav {
-    h1,
-    a {
-      opacity: .5;
-    }
-    h1 {
-      margin: .5em 0;
-      font-size: 1em;
-    }
-    .subtitle {
-      display: none;
-    }
-  }
-  .post-nav {
-    background-color: $color-tiffany-blue;
-  }
-  .post {
-    padding: 1em 0;
-  }
-}
 .comment-form {
-  width: 100%;
-
-  .subheader {
-    display: flex;
-    justify-content: space-between;
-  }
   input,
   textarea {
-    margin: .25em 0;
     background-color: #fff;
   }
   input:read-only {
@@ -124,7 +101,7 @@
   textarea {
     height: 8em;
   }
-  .edit-btn {
+  .submit-btn {
     padding: .5em;
     border: 1px solid rgba($color-outer-space, .5);
     background-color: #ccc;
