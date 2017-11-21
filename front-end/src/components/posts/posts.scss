@@ -43,7 +43,8 @@
     display: block;
     padding: .5em 0;
   }
-  .post-input {
+  input:read-only {
+    opacity: .5;
   }
   .icon-btn {
     font-size: 1em;

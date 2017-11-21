@@ -37,6 +37,7 @@ export default function CommentForm ({ comment, submitCta, onChange, onSubmit, r
           name='author'
           value={author || ''}
           onChange={onChange}
+          required={true}
         />
       </div>
       <div className='field'>
@@ -49,6 +50,7 @@ export default function CommentForm ({ comment, submitCta, onChange, onSubmit, r
           name='body'
           value={body || ''}
           onChange={onChange}
+          required={true}
         />
       </div>
       <button

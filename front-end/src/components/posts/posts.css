@@ -32,6 +32,10 @@
   display: block;
   padding: .5em 0; }
 
+.post-form input:read-only,
+.comment-form input:read-only {
+  opacity: .5; }
+
 .post-form .icon-btn,
 .comment-form .icon-btn {
   font-size: 1em;
