@@ -108,3 +108,47 @@ nav {
     color: $color-outer-space;
   }
 }
+.sorting-container {
+  padding: 1em 0 .5em;
+  display: flex;
+  justify-content: flex-end;
+
+  .sort-title {
+    color: $color-outer-space;
+    padding: 0 .75em 0;
+    min-width: 8em;
+    text-align: right;
+  }
+  .sorting-options {
+    width: 20em;
+    display: flex;
+    align-self: flex-end;
+    justify-content: space-between;
+  }
+  .sort-field {
+    display: flex;
+    align-items: center;
+    color: $color-outer-space;
+    border: 1px solid $color-outer-space;
+    padding: 0 .5em;
+    font-size: .75em;
+    border-radius: .25em;
+
+    &.selected {
+      color: $color-white;
+      background-color: $color-amethyst;
+      border: 1px solid $color-amethyst;
+    }
+    input {
+      display: none;
+    }
+    .order,
+    span,
+    svg {
+      display: flex;
+    }
+    span {
+      margin-left: .25em;
+    }
+  }
+}

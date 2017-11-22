@@ -53,11 +53,8 @@ class AddPostPage extends Component {
     const { newPost } = this.props
     const { post } = this.state
 
-    const timestamp = Date.now()
-    const data = {
-      post,
-      timestamp
-    }
+    const timestamp = { timestamp: Date.now() }
+    const data = Object.assign({}, post, timestamp)
 
     api.addPost(data)
       .then(newPost)

@@ -55,7 +55,7 @@ class Api {
     const request = new Request(`http://localhost:3001/posts`, {
       method: 'POST',
       headers: this.requestHeaders(),
-      body: JSON.stringify(data.post),
+      body: JSON.stringify(data),
     })
     return fetch(request)
       .then((res) => res.json())

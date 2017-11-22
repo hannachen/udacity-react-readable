@@ -1,5 +1,11 @@
 @import "../../variables.scss";
 
+.comments-nav {
+  .sorting-container {
+    width: 22em;
+    padding: 0;
+  }
+}
 .add-comment,
 .edit-comment {
   padding: 0 .75em;

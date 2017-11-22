@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import { fetchPost, scorePost } from '../../actions'
 import api from '../../utils/api'
 import Nav from '../Nav'
@@ -45,6 +46,7 @@ class PostPage extends Component {
   render() {
     const { category, post } = this.props
     const { voting } = this.state
+    const formattedDate = (post && post.timestamp) ? moment.unix(post.timestamp/1000).format("MMMM DD, YYYY hh:mma") : null
 
     if (!post) {
       return (
@@ -57,6 +59,7 @@ class PostPage extends Component {
         <div className='post'>
           <p className='author'>By: {post.author}</p>
           <p className='body'>{post.body}</p>
+          <p className='date'>{formattedDate}</p>
           <div className='post-score'>
             <div className='score'>
               <em>SCORE</em>
