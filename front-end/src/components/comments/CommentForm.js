@@ -12,7 +12,7 @@ export default function CommentForm ({ comment, submitCta, onChange, onSubmit, r
   }, [])
 
   return (
-    <form className='comment-form'>
+    <form className='comment-form' onSubmit={onSubmit}>
       {comment && id &&
         <input
           type='hidden'
@@ -53,9 +53,7 @@ export default function CommentForm ({ comment, submitCta, onChange, onSubmit, r
           required={true}
         />
       </div>
-      <button
-        className='submit-btn'
-        onClick={onSubmit}>
+      <button className='submit-btn'>
         {submitCta}
       </button>
     </form>

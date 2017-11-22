@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
 import { addComment } from '../../actions'
@@ -16,7 +15,6 @@ class AddCommentPage extends Component {
       author: '',
       parentId: '',
     },
-    redirect: false
   }
   constructor(props, context) {
     super(props, context)
@@ -61,7 +59,6 @@ class AddCommentPage extends Component {
     api.addComment(data)
       .then(newComment)
       .then(() => {
-        this.setState({ redirect: true })
         onSuccess()
       })
   }

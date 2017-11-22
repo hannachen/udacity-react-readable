@@ -34,10 +34,30 @@
     font-size: .75em;
   }
   .posts,
-  .comments {
+  .meta {
     display: flex;
     margin-left: auto;
     align-items: center;
+  }
+  .meta {
+    min-width: 7em;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .score,
+  .comments {
+    text-align: center;
+
+    em {
+      font-style: normal;
+      font-size: .5em;
+      display: block;
+    }
+    span {
+      font-size: 1.5em;
+      font-weight: bold;
+      line-height: 70%;
+    }
   }
 }
 .post-list {

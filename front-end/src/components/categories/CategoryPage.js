@@ -24,13 +24,19 @@ class CategoryPage extends Component {
   }
   render() {
     const { category, posts } = this.props
+
+    // Sort high to low
+    const sortedPosts = posts.sort((a, b) => {
+      return b.voteScore - a.voteScore
+    })
+
     return (
       <div className='category-page'>
         {category &&
           <Nav category={category} />
         }
         {posts &&
-          <PostList posts={posts} />
+          <PostList posts={sortedPosts} />
         }
       </div>
     )

@@ -20,8 +20,15 @@ export default function PostList ({ posts }) {
               <div className='title'>{post.title}</div>
               <div className='author'>by {post.author}</div>
             </div>
-            <div className='comments'>
-              <span>{post.commentCount} comments</span>
+            <div className='meta'>
+              <div className='score'>
+                <em>SCORE</em>
+                <span>{post.voteScore}</span>
+              </div>
+              <div className='comments'>
+                <em>COMMENTS</em>
+                <span>{post.commentCount}</span>
+              </div>
             </div>
           </Link>
         </li>

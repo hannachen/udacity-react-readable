@@ -6,7 +6,7 @@ const initialState = {
 }
 
 export const posts = (state = initialState, action) => {
-  const { posts } = action
+  const { posts, post } = action
   let namedPosts = {}
   switch(action.type) {
     case types.FETCH_ALL_POSTS:
@@ -47,7 +47,6 @@ export const posts = (state = initialState, action) => {
         }
       }
     case types.GET_POST:
-      const { post } = action
       const byCategory = state['byCategory'][post.category] || []
       return {
         ...state,
@@ -75,17 +74,12 @@ export const posts = (state = initialState, action) => {
         }
       }
     case types.EDIT_POST:
-      const { editPost } = action
-      const editPosts = state['byCategory'][editPost.category] || []
+    case types.SCORE_POST:
       return {
         ...state,
-        'byCategory': {
-          ...state['byCategory'],
-          [editPost.category]: Array.from(new Set(editPosts.concat(editPost.id))),
-        },
         'all': {
           ...state['all'],
-          [editPost.id]: editPost
+          [post.id]: post
         }
       }
     default:

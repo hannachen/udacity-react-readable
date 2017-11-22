@@ -74,6 +74,21 @@ class Api {
       .then((res) => res.json())
   }
 
+  static scorePost(postId, vote) {
+    const request = new Request(`http://localhost:3001/posts/${postId}`, {
+      method: 'POST',
+      headers: this.requestHeaders(),
+      body: JSON.stringify({
+        option: vote
+      }),
+    })
+    return fetch(request)
+      .then((res) => res.json())
+      .catch((error) => {
+        return error
+      })
+  }
+
   static fetchPostComments(postId) {
     const request = new Request(`http://localhost:3001/posts/${postId}/comments`, {
       method: 'GET',

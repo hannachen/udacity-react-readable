@@ -6,6 +6,47 @@
   .author {
     font-size: .75em;
   }
+  .body {
+    margin: 1em 0 1.5em;
+  }
+}
+.post-score {
+  border-top: 1px solid $color-gray-light;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5em 0 0;
+
+  ul {
+    margin: 0;
+  }
+  button {
+    border: 0;
+    background: none;
+    color: $color-gray-light;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-amethyst;
+    }
+  }
+  .score {
+    color: $color-amethyst;
+    text-align: center;
+
+    em {
+      display: block;
+      font-size: .5em;
+      font-style: normal;
+    }
+    strong {
+      font-size: 1.75em;
+      line-height: 50%;
+    }
+  }
+  .post-vote {
+    display: flex;
+  }
 }
 .post-page {
   .category-nav {

@@ -4,6 +4,7 @@ export const FETCH_POSTS = 'FETCH_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const GET_POST = 'GET_POST'
 export const EDIT_POST = 'EDIT_POST'
+export const SCORE_POST = 'SCORE_POST'
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
@@ -44,10 +45,16 @@ export function fetchPost(post) {
     post,
   }
 }
-export function editPost(editPost) {
+export function editPost(post) {
   return {
     type: EDIT_POST,
-    editPost,
+    post,
+  }
+}
+export function scorePost(post) {
+  return {
+    type: SCORE_POST,
+    post,
   }
 }
 

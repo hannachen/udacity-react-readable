@@ -81,6 +81,10 @@ nav {
   .new-item-link {
     font-size: .8em;
     font-weight: bold;
+    text-align: right;
+    display: block;
+    min-width: 5em;
+    margin: 0 0 0 .5em;
   }
   .subtitle {
     font-size: 1.25em;
