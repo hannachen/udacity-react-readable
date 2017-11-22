@@ -71,6 +71,7 @@ class CategoryPage extends Component {
               order={order}
               orderBy={orderBy}
               onSort={this.onSort}
+              disabled={(posts.length <= 1)}
             />
             <PostList posts={sortedPosts} />
           </div>

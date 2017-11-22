@@ -83,6 +83,7 @@ class CommentList extends Component {
               order={order}
               orderBy={orderBy}
               onSort={this.onSort}
+              disabled={(comments.length <= 1)}
             />
           }
           {addComment ?

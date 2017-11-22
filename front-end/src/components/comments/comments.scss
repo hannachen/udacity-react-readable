@@ -4,6 +4,10 @@
   .sorting-container {
     width: 22em;
     padding: 0;
+
+    &.disabled {
+      display: none;
+    }
   }
 }
 .add-comment,
