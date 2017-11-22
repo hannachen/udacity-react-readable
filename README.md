@@ -1,4 +1,4 @@
-# Readable Front-end
+# Readable
 
 This is the second assignment for Udacity's React Nanodegree Program. This assignment makes use of Redux.
 
