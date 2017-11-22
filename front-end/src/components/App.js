@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import Header from './Header'
-import CategoryList from './categories/CategoryList'
+import HomePage from './HomePage'
 import CategoryPage from './categories/CategoryPage'
 import AddPostPage from './posts/AddPostPage'
 import EditPostPage from './posts/EditPostPage'
@@ -16,7 +16,7 @@ class App extends Component {
         <Header />
 
         <div className="contents">
-          <Route exact path='/' component={CategoryList} />
+          <Route exact path='/' component={HomePage} />
           <Route path='/category/:categoryId' component={CategoryPage} />
           <Route path='/post/new/:categoryId' component={AddPostPage} />
           <Route path='/post/edit/:postId' component={EditPostPage} />
