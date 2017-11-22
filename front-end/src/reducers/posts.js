@@ -19,7 +19,7 @@ export const posts = (state = initialState, action) => {
         }
         allPosts[post.category].push(post.id)
         return allPosts
-      }, {})
+      }, [])
       return {
         ...state,
         'byCategory': {

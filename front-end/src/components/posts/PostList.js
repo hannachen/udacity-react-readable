@@ -4,7 +4,7 @@ import moment from 'moment'
 import ArrowIcon from 'react-icons/lib/md/reply'
 import './posts.css'
 
-export default function PostList ({ posts }) {
+export default function Posts ({ posts }) {
 
   return (
     <ul className='post-list'>
