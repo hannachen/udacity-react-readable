@@ -9,10 +9,10 @@ yarn >= v0.27 or npm >= v5.0
 
 * Install and start the API server
     - `cd api-server`
-    - `yarn install` or `npm install`
+    - `yarn` or `npm install`
     - `node server`
     
 * In another terminal window, install and start the front-end
     - `cd front-end`
-    - `yarn install` or `npm install`
+    - `yarn` or `npm install`
     - `yarn start` or `npm start`
