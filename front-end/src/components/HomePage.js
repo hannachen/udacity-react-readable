@@ -5,12 +5,14 @@ import CategoryList from './categories/CategoryList'
 class HomePage extends Component {
 
   render() {
-    const { categories } = this.props
+    const { categories, posts } = this.props
 
     return (
       <div className='home-page'>
-        {categories &&
-          <CategoryList />
+        {categories && posts ?
+          <CategoryList categories={categories} posts={posts} />
+          :
+          <p>No categories available</p>
         }
       </div>
     )
