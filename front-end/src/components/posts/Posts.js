@@ -45,19 +45,22 @@ class Posts extends Component {
     const sortedPosts = posts ? this.sortPosts() : null
 
     return (
-      <div className='category-page'>
+      <div className='posts-page'>
         {category &&
           <Nav category={category} />
         }
         {posts && posts.length > 0 &&
-          <SortBy
-            title='Sort posts'
-            fields={['voteScore', 'timestamp', 'commentCount']}
-            order={order}
-            orderBy={orderBy}
-            onSort={this.onSort}
-            disabled={(posts.length <= 1)}
-          />
+          <div className='posts-header'>
+            <h2>Posts</h2>
+            <SortBy
+              title='Sort posts'
+              fields={['voteScore', 'timestamp', 'commentCount']}
+              order={order}
+              orderBy={orderBy}
+              onSort={this.onSort}
+              disabled={(posts.length <= 1)}
+            />
+          </div>
         }
         <PostList posts={sortedPosts} />
       </div>

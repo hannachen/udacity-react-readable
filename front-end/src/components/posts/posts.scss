@@ -79,6 +79,11 @@
     }
   }
 }
+.posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .post-list {
   .no-posts {
     padding: 0 2.5em 1em 0;
