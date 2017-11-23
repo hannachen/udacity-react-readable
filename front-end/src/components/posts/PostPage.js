@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import moment from 'moment'
-import { fetchPost, scorePost } from '../../actions'
+import { fetchPost, scorePost, deletePost } from '../../actions'
 import api from '../../utils/api'
 import Nav from '../Nav'
 import CommentsList from '../comments/CommentList'
+import TrashIcon from 'react-icons/lib/go/trashcan'
 import ThumbUpIcon from 'react-icons/lib/md/thumb-up'
 import ThumbDownIcon from 'react-icons/lib/md/thumb-down'
 
 class PostPage extends Component {
   state = {
     voting: false,
+    redirect: false,
+    redirectCategory: null,
   }
   constructor(props, context) {
     super(props, context)
@@ -19,6 +23,7 @@ class PostPage extends Component {
     this.upVote = this.upVote.bind(this)
     this.downVote = this.downVote.bind(this)
     this.scorePost = this.scorePost.bind(this)
+    this.deletePost = this.deletePost.bind(this)
   }
   fetchPost() {
     const { postId } = this.props.match.params
@@ -38,12 +43,27 @@ class PostPage extends Component {
     const { scorePost } = this.props
     api.scorePost(postId, vote)
       .then(scorePost)
-      .then((res) => this.setState(() => ({
+      .then(() => this.setState(() => ({
         voting: false,
+      })))
+  }
+  deletePost() {
+    const { post, deletePost } = this.props
+    api.deletePost(post.id)
+      .then(deletePost)
+      .then((res) => this.setState(() => ({
+        redirect: true,
+        redirectCategory: res.post.category
       })))
   }
 
   render() {
+    const { redirect, redirectCategory } = this.state
+
+    if (redirect && redirectCategory) {
+      return <Redirect to={`/category/${redirectCategory}`} />
+    }
+
     const { category, post } = this.props
     const { voting } = this.state
     const formattedDate = (post && post.timestamp) ? moment.unix(post.timestamp/1000).format("MMMM DD, YYYY hh:mma") : null
@@ -59,7 +79,14 @@ class PostPage extends Component {
         <div className='post'>
           <p className='author'>By: {post.author}</p>
           <p className='body'>{post.body}</p>
-          <p className='date'>{formattedDate}</p>
+          <div className='meta'>
+            <p className='date'>{formattedDate}</p>
+            <div className='delete'>
+              <button className='icon-btn' onClick={this.deletePost}>
+                <TrashIcon size={20} />
+              </button>
+            </div>
+          </div>
           <div className='post-score'>
             <div className='score'>
               <em>SCORE</em>
@@ -99,6 +126,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchPost: (data) => dispatch(fetchPost(data)),
     scorePost: (data) => dispatch(scorePost(data)),
+    deletePost: (data) => dispatch(deletePost(data)),
   }
 }
 

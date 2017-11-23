@@ -63,6 +63,21 @@
   .post-nav {
     background-color: $color-tiffany-blue;
   }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      border: 0;
+      background: none;
+      color: $color-gray-light;
+
+      &:hover {
+        color: $color-outer-space;
+      }
+    }
+  }
 }
 .post-list {
   .no-posts {

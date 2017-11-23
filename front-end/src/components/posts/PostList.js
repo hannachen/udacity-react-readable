@@ -2,9 +2,8 @@ import React  from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import ArrowIcon from 'react-icons/lib/md/reply'
-import './posts.css'
 
-export default function Posts ({ posts }) {
+export default function PostList ({ posts }) {
 
   return (
     <ul className='post-list'>

@@ -5,11 +5,12 @@ export const ADD_POST = 'ADD_POST'
 export const GET_POST = 'GET_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const SCORE_POST = 'SCORE_POST'
+export const DELETE_POST = 'DELETE_POST'
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const SCORE_COMMENT = 'SCORE_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 // CATEGORIES
 export function fetchCategories(categories) {
@@ -54,6 +55,12 @@ export function editPost(post) {
 export function scorePost(post) {
   return {
     type: SCORE_POST,
+    post,
+  }
+}
+export function deletePost(post) {
+  return {
+    type: DELETE_POST,
     post,
   }
 }

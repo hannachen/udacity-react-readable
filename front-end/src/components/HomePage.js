@@ -12,7 +12,6 @@ class HomePage extends Component {
 
   render() {
     const { categories, posts } = this.props
-    console.log('posts?', posts)
 
     return (
       <div className='home-page'>
@@ -42,9 +41,7 @@ const mapStateToProps = ({ categories, posts }) => {
 
   return {
     categories: categoriesWithPostCount,
-    posts: Object.keys(posts['all']).map((postId) => {
-      return posts['all'][postId] || null
-    }),
+    posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || null,
   }
 }
 

@@ -89,6 +89,18 @@ class Api {
       })
   }
 
+  static deletePost(postId) {
+    const request = new Request(`http://localhost:3001/posts/${postId}`, {
+      method: 'DELETE',
+      headers: this.requestHeaders(),
+    })
+    return fetch(request)
+      .then((res) => res.json())
+      .catch((error) => {
+        return error
+      })
+  }
+
   static fetchPostComments(postId) {
     const request = new Request(`http://localhost:3001/posts/${postId}/comments`, {
       method: 'GET',

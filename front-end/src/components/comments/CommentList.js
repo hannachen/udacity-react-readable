@@ -120,7 +120,7 @@ const mapStateToProps = ({ comments }, ownProps) => {
   const { post } = ownProps
   const postComments = comments['byPost'][post.id] || []
   return {
-    comments: postComments.map((comment) => (comments['all'][comment])) || null,
+    comments: postComments.map((comment) => (comments['all'][comment])).filter((post) => (!post.deleted)) || null,
   }
 }
 const mapDispatchToProps = (dispatch) => {

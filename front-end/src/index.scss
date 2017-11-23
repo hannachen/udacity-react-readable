@@ -65,6 +65,7 @@ header {
 .contents {
   padding: 0 .75em;
   line-height: 145%;
+  overflow: hidden;
 }
 nav {
   display: flex;
@@ -72,6 +73,7 @@ nav {
   margin: 0 -.75em;
   padding: 0 .75em;
   background-color: $color-amazonite;
+  box-sizing: border-box;
 
   .new-item-link,
   .subtitle {

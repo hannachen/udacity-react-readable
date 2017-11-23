@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SortBy from '../SortBy'
 import Nav from '../Nav'
 import PostList from './PostList'
+import './posts.css'
 
 class Posts extends Component {
   state = {
@@ -48,17 +49,15 @@ class Posts extends Component {
         {category &&
           <Nav category={category} />
         }
-        {posts &&
-          <div>
-            <SortBy
-              title='Sort posts'
-              fields={['voteScore', 'timestamp', 'commentCount']}
-              order={order}
-              orderBy={orderBy}
-              onSort={this.onSort}
-              disabled={(posts.length <= 1)}
-            />
-          </div>
+        {posts && posts.length > 0 &&
+          <SortBy
+            title='Sort posts'
+            fields={['voteScore', 'timestamp', 'commentCount']}
+            order={order}
+            orderBy={orderBy}
+            onSort={this.onSort}
+            disabled={(posts.length <= 1)}
+          />
         }
         <PostList posts={sortedPosts} />
       </div>

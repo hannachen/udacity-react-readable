@@ -82,6 +82,18 @@ export const posts = (state = initialState, action) => {
           [post.id]: post
         }
       }
+    case types.DELETE_POST:
+      const newState = {
+        ...state,
+        'byCategory': {
+          [post.category]:
+            state['byCategory'][post.category].filter((postId) => {
+              return postId !== post.id
+            })
+        },
+      }
+      delete newState['all'][post.id]
+      return newState
     default:
       return state
   }

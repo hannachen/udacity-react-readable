@@ -84,9 +84,6 @@ class Comment extends Component {
     const { editing, voting, comment } = this.state
     const formattedDate = moment.unix(comment.timestamp/1000).format("MMMM DD, YYYY hh:mma")
 
-    if (comment.deleted) {
-      return null
-    }
     return (
       <li className='comment-container'>
         <div className='votescore-container'>
