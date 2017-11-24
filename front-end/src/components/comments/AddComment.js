@@ -34,11 +34,6 @@ class AddCommentPage extends Component {
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    const { posts } = this.props
-    const { comment } = this.state
-    return nextProps.posts !== posts || nextState !== comment
-  }
   onChange(e) {
     const { comment } = this.state
     comment[e.target.name] = e.target.value

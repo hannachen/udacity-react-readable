@@ -36,11 +36,6 @@ class AddPostPage extends Component {
       }
     }
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    const { categories } = this.props
-    const { post } = this.state
-    return nextProps.categories !== categories || nextState !== post
-  }
   onChange(e) {
     const { post } = this.state
     post[e.target.name] = e.target.value

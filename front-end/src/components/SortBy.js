@@ -16,6 +16,7 @@ export default function SortBy ({ title, fields, order, orderBy, onSort, disable
               type="radio"
               value={field}
               checked={(orderBy === field)}
+              readOnly={(orderBy === field)}
               onClick={onSort}
             />
             {field === orderBy ?
