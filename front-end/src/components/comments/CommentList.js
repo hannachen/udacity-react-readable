@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchComments } from '../../actions'
-import api from '../../utils/api'
 import Comment from './Comment'
 import AddComment from './AddComment'
 import ArrowIcon from 'react-icons/lib/md/reply'
@@ -23,17 +22,14 @@ class CommentList extends Component {
     this.exitAddComment = this.exitAddComment.bind(this)
     this.onSort = this.onSort.bind(this)
     this.sortComments = this.sortComments.bind(this)
-
+  }
+  componentDidMount() {
     this.fetchComments()
   }
   fetchComments() {
-    const { post } = this.props
+    const { post, fetchComments } = this.props
     const postId = post.id
-    api.fetchPostComments(postId)
-      .then((comments) => {
-        const { fetchComments } = this.props
-        fetchComments({postId, comments})
-      })
+    fetchComments(postId)
   }
   onAddComment() {
     this.setState({ addComment: true })

@@ -5,7 +5,6 @@ import uuid from 'uuid/v1'
 import { addPost } from '../../actions'
 import Nav from '../Nav'
 import PostForm from './PostForm'
-import api from '../../utils/api'
 import './posts.css'
 
 class AddPostPage extends Component {
@@ -50,14 +49,12 @@ class AddPostPage extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    const { newPost } = this.props
     const { post } = this.state
-
     const timestamp = { timestamp: Date.now() }
     const data = Object.assign({}, post, timestamp)
 
-    api.addPost(data)
-      .then(newPost)
+    const { newPost } = this.props
+    newPost(data)
       .then(() => {
         this.setState({ redirect: true })
       })
@@ -70,7 +67,7 @@ class AddPostPage extends Component {
     const currentCategory = categories[category]
 
     if (redirect) {
-      return <Redirect to={`/post/view/${id}`} />;
+      return <Redirect to={`/post/view/${id}`} />
     }
     return (
       <div className='add-post'>

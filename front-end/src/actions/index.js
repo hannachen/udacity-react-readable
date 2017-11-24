@@ -1,87 +1,78 @@
-
-// CATEGORIES
-export function fetchCategories(categories) {
-  return {
-    type: FETCH_CATEGORIES,
-    categories,
-  }
-}
 import * as types from './types'
 
 // POSTS
-export function fetchAllPosts(posts) {
+export function fetchAllPosts() {
   return {
-    type: FETCH_ALL_POSTS,
-    posts: posts,
+    type: types.FETCH_ALL_POSTS
   }
 }
-export function fetchPosts({ category, posts }) {
+export function fetchPosts(category) {
   return {
-    type: FETCH_POSTS,
-    category,
-    posts,
+    type: types.FETCH_POSTS,
+    category
   }
 }
-export function addPost(newPost) {
+export function fetchPost(postId) {
   return {
-    type: ADD_POST,
-    newPost,
+    type: types.FETCH_POST,
+    postId,
   }
 }
-export function fetchPost(post) {
+export function addPost(post) {
   return {
-    type: GET_POST,
+    type: types.ADD_POST,
     post,
   }
 }
 export function editPost(post) {
   return {
-    type: EDIT_POST,
+    type: types.EDIT_POST,
     post,
   }
 }
-export function scorePost(post) {
+export function scorePost({ postId, vote }) {
   return {
-    type: SCORE_POST,
-    post,
+    type: types.SCORE_POST,
+    postId,
+    vote
   }
 }
 export function deletePost(post) {
   return {
-    type: DELETE_POST,
+    type: types.DELETE_POST,
     post,
   }
 }
 
 // COMMENTS
-export function fetchComments({ postId, comments }) {
+export function fetchComments(postId) {
   return {
-    type: FETCH_COMMENTS,
+    type: types.FETCH_COMMENTS,
     postId,
-    comments,
   }
 }
 export function addComment(comment) {
   return {
-    type: ADD_COMMENT,
+    type: types.ADD_COMMENT,
     comment,
   }
 }
 export function editComment(comment) {
   return {
-    type: EDIT_COMMENT,
+    type: types.EDIT_COMMENT,
     comment,
   }
 }
 export function deleteComment(comment) {
   return {
-    type: DELETE_COMMENT,
+    type: types.DELETE_COMMENT,
     comment,
   }
 }
-export function scoreComment(comment) {
+export function scoreComment({commentId, vote}) {
   return {
-    type: SCORE_COMMENT,
-    comment,
+    type: types.SCORE_COMMENT,
+    commentId,
+    vote
   }
 }

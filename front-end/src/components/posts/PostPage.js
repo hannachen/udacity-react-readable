@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { fetchPost, scorePost, deletePost } from '../../actions'
-import api from '../../utils/api'
 import Nav from '../Nav'
 import CommentsList from '../comments/CommentList'
 import TrashIcon from 'react-icons/lib/go/trashcan'
@@ -18,18 +17,19 @@ class PostPage extends Component {
   }
   constructor(props, context) {
     super(props, context)
-    this.fetchPost()
     this.fetchPost = this.fetchPost.bind(this)
     this.upVote = this.upVote.bind(this)
     this.downVote = this.downVote.bind(this)
     this.scorePost = this.scorePost.bind(this)
     this.deletePost = this.deletePost.bind(this)
   }
+  componentDidMount() {
+    this.fetchPost()
+  }
   fetchPost() {
     const { postId } = this.props.match.params
     const { fetchPost } = this.props
-    api.fetchPost(postId)
-      .then(fetchPost)
+    fetchPost(postId)
   }
   upVote() {
     this.scorePost('upVote')
@@ -41,19 +41,17 @@ class PostPage extends Component {
     const { postId } = this.props.match.params
     this.setState(() => ({ voting: true }))
     const { scorePost } = this.props
-    api.scorePost(postId, vote)
-      .then(scorePost)
+    scorePost({ postId, vote })
       .then(() => this.setState(() => ({
         voting: false,
       })))
   }
   deletePost() {
     const { post, deletePost } = this.props
-    api.deletePost(post.id)
-      .then(deletePost)
-      .then((res) => this.setState(() => ({
+    deletePost(post)
+      .then(() => this.setState(() => ({
         redirect: true,
-        redirectCategory: res.post.category
+        redirectCategory: post.category
       })))
   }
 

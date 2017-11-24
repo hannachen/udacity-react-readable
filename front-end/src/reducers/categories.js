@@ -2,13 +2,12 @@ import * as types from '../actions/types'
 
 export const categories = (state = {}, action) => {
   switch(action.type) {
-    case types.FETCH_CATEGORIES:
+    case types.FETCH_CATEGORIES_RECEIVED:
       const { categories } = action
-      const newState = (categories.categories).reduce((cats = {}, cat) => {
+      return categories.reduce((cats = {}, cat) => {
         cats[cat.path] = cat
         return cats
       }, {})
-      return newState
     default:
       return state
   }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { fetchPost, editPost } from '../../actions'
 import Nav from '../Nav'
 import PostForm from './PostForm'
-import api from '../../utils/api'
 import './posts.css'
 
 class EditPostPage extends Component {
@@ -28,16 +27,16 @@ class EditPostPage extends Component {
       post,
     }
   }
-  componentWillMount() {
-    const { postId, post } = this.state
-    if (!post) {
-      const { fetchPost } = this.props
-      api.fetchPost(postId)
-        .then(fetchPost)
-        .then((res) => {
-          this.setState({ post: res.post })
-        })
-    }
+  componentDidMount() {
+    this.fetchPost()
+  }
+  fetchPost() {
+    const { postId } = this.state
+    const { fetchPost } = this.props
+    fetchPost(postId)
+      .then((post) => {
+        this.setState({ post })
+      })
   }
   componentWillReceiveProps(nextProps) {
     const { post } = nextProps
@@ -57,8 +56,7 @@ class EditPostPage extends Component {
 
     const { post } = this.state
     const { editPost } = this.props
-    api.editPost(post)
-      .then(editPost)
+    editPost(post)
       .then(() => {
         this.setState({ redirect: true })
       })

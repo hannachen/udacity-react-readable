@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
 import { addComment } from '../../actions'
-import api from '../../utils/api'
 import CommentForm from "./CommentForm";
 
 class AddCommentPage extends Component {
@@ -56,8 +55,7 @@ class AddCommentPage extends Component {
     }
 
     const { newComment, onSuccess } = this.props
-    api.addComment(data)
-      .then(newComment)
+    newComment(data)
       .then(() => {
         onSuccess()
       })

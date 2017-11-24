@@ -8,7 +8,7 @@ const initialState = {
 export const comments = (state = initialState, action) => {
   const { comment } = action
   switch(action.type) {
-    case types.FETCH_COMMENTS:
+    case types.FETCH_COMMENTS_RECEIVED:
       const { postId, comments } = action
       let namedComments = {}
       const postComents = comments || []
@@ -41,8 +41,8 @@ export const comments = (state = initialState, action) => {
           [comment.id]: comment
         }
       }
-    case types.EDIT_COMMENT:
-    case types.SCORE_COMMENT:
+    case types.EDIT_COMMENT_SUCCESS:
+    case types.SCORE_COMMENT_SUCCESS:
       return {
         ...state,
         'all': {
@@ -50,7 +50,7 @@ export const comments = (state = initialState, action) => {
           [comment.id]: comment
         }
       }
-    case types.DELETE_COMMENT:
+    case types.DELETE_COMMENT_SUCCESS:
       const newState = {
         ...state,
         'byPost': {

@@ -6,7 +6,6 @@ import DownVoteIcon from 'react-icons/lib/go/triangle-down'
 import TrashIcon from 'react-icons/lib/go/trashcan'
 import EditIcon from 'react-icons/lib/go/pencil'
 import { editComment, scoreComment, deleteComment } from '../../actions'
-import api from '../../utils/api'
 import EditComment from './EditComment'
 
 class Comment extends Component {
@@ -52,8 +51,7 @@ class Comment extends Component {
     }
 
     const { editComment } = this.props
-    api.editComment(data)
-      .then(editComment)
+    editComment(data)
       .then(() => this.toggleForm())
   }
   upVote() {
@@ -65,25 +63,24 @@ class Comment extends Component {
   scoreComment(vote) {
     this.setState(() => ({ voting: true }))
     const { comment, scoreComment } = this.props
-    api.scoreComment(comment.id, vote)
-      .then(scoreComment)
-      .then((res) => this.setState(() => ({
+    scoreComment({commentId: comment.id, vote})
+      .then((comment) => this.setState(() => ({
         voting: false,
-        comment: res.comment,
+        comment,
       })))
   }
   deleteComment() {
     const { comment, deleteComment } = this.props
-    api.deleteComment(comment.id)
-      .then(() => {
-        deleteComment(comment)
-      })
+    deleteComment(comment)
   }
 
   render() {
     const { editing, voting, comment } = this.state
     const formattedDate = moment.unix(comment.timestamp/1000).format("MMMM DD, YYYY hh:mma")
 
+    if (comment.deleted) {
+      return null
+    }
     return (
       <li className='comment-container'>
         <div className='votescore-container'>

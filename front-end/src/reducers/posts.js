@@ -9,7 +9,7 @@ export const posts = (state = initialState, action) => {
   const { posts, post } = action
   let namedPosts = {}
   switch(action.type) {
-    case types.FETCH_ALL_POSTS:
+    case types.FETCH_ALL_POSTS_RECEIVED:
       posts.forEach((post) => {
         namedPosts[post.id] = post
       })
@@ -30,7 +30,7 @@ export const posts = (state = initialState, action) => {
           ...namedPosts
         }
       }
-    case types.FETCH_POSTS:
+    case types.FETCH_POSTS_RECEIVED:
       const { category } = action
       posts.forEach((post) => {
         namedPosts[post.id] = post
@@ -46,7 +46,7 @@ export const posts = (state = initialState, action) => {
           ...namedPosts
         }
       }
-    case types.GET_POST:
+    case types.FETCH_POST_RECEIVED:
       const byCategory = state['byCategory'][post.category] || []
       return {
         ...state,
@@ -59,22 +59,21 @@ export const posts = (state = initialState, action) => {
           [post.id]: post
         }
       }
-    case types.ADD_POST:
-      const { newPost } = action
-      const newPosts = state['byCategory'][newPost.category] || []
+    case types.ADD_POST_SUCCESS:
+      const newPosts = state['byCategory'][post.category] || []
       return {
         ...state,
         'byCategory': {
           ...state['byCategory'],
-          [newPost.category]: Array.from(new Set(newPosts.concat(newPost.id))),
+          [post.category]: Array.from(new Set(newPosts.concat(post.id))),
         },
         'all': {
           ...state['all'],
-          [newPost.id]: newPost
+          [post.id]: post
         }
       }
-    case types.EDIT_POST:
-    case types.SCORE_POST:
+    case types.EDIT_POST_SUCCESS:
+    case types.SCORE_POST_SUCCESS:
       return {
         ...state,
         'all': {
@@ -82,17 +81,18 @@ export const posts = (state = initialState, action) => {
           [post.id]: post
         }
       }
-    case types.DELETE_POST:
+    case types.DELETE_POST_SUCCESS:
+      const postId = post.id
       const newState = {
         ...state,
         'byCategory': {
           [post.category]:
-            state['byCategory'][post.category].filter((postId) => {
-              return postId !== post.id
+            state['byCategory'][post.category].filter((post) => {
+              return postId === post.id
             })
         },
       }
-      delete newState['all'][post.id]
+      delete newState['all'][postId]
       return newState
     default:
       return state

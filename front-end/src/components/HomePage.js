@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { fetchAllPosts } from '../actions'
 import CategoryList from './categories/CategoryList'
 import Posts from './posts/Posts'
 
 class HomePage extends Component {
-
-  shouldComponentUpdate(nextProps) {
-    const { categories, posts } = this.props
-    return nextProps.categories !== categories || nextProps.posts !== posts
+  componentDidMount() {
+    const { fetchAllPosts } = this.props
+    fetchAllPosts()
   }
 
   render() {
@@ -44,7 +44,13 @@ const mapStateToProps = ({ categories, posts }) => {
     posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || null,
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllPosts: () => dispatch(fetchAllPosts()),
+  }
+}
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(HomePage)

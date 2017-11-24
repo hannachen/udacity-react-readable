@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../../actions'
-import api from '../../utils/api'
 import Posts from '../posts/Posts'
 
 class CategoryPage extends Component {
@@ -10,16 +9,13 @@ class CategoryPage extends Component {
 
     this.fetchPosts = this.fetchPosts.bind(this)
   }
-  componentWillMount() {
+  componentDidMount() {
     this.fetchPosts()
   }
   fetchPosts() {
     const { categoryId } = this.props.match.params
-    api.fetchPosts(categoryId)
-      .then((posts) => {
-        const { fetchPosts } = this.props
-        fetchPosts({ category: categoryId, posts })
-      })
+    const { fetchPosts } = this.props
+    fetchPosts(categoryId)
   }
 
   render() {
