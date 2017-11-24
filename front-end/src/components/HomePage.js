@@ -31,16 +31,8 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = ({ categories, posts }) => {
-  const categoriesWithPostCount = Object.keys(categories).reduce((result = {}, key) => {
-    result[categories[key].path] = {
-      ...categories[key],
-      postCount: posts['byCategory'][key] ? posts['byCategory'][key].length : 0
-    }
-    return result
-  }, {})
-
   return {
-    categories: categoriesWithPostCount,
+    categories,
     posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || null,
   }
 }

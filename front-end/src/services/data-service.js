@@ -5,6 +5,21 @@ const dataService = store => next => action => {
   // Pass all actions through by default
   next(action)
   switch (action.type) {
+    case types.FETCH_CATEGORIES:
+      api.fetchCategories()
+        .then(({ categories }) => {
+          next({
+            type: types.FETCH_CATEGORIES_RECEIVED,
+            categories
+          })
+        })
+        .catch((err) => {
+          return next({
+            type: types.FETCH_CATEGORIES_ERROR,
+            err
+          })
+        })
+      break
     case types.FETCH_ALL_POSTS:
       api.fetchAllPosts()
         .then((posts) => {
@@ -12,25 +27,17 @@ const dataService = store => next => action => {
             type: types.FETCH_ALL_POSTS_RECEIVED,
             posts
           })
+          return { posts }
+        })
+        .then(({ posts }) => {
+          next({
+            type: types.UPDATE_CATEGORY_POST_COUNT,
+            posts
+          })
         })
         .catch((err) => {
           return next({
             type: types.FETCH_ALL_POSTS_ERROR,
-            err
-          })
-        })
-      break
-    case types.FETCH_CATEGORIES:
-      api.fetchCategories()
-        .then((data) => {
-          next({
-            type: types.FETCH_CATEGORIES_RECEIVED,
-            categories: data.categories
-          })
-        })
-        .catch((err) => {
-          return next({
-            type: types.FETCH_CATEGORIES_ERROR,
             err
           })
         })
@@ -43,6 +50,13 @@ const dataService = store => next => action => {
             type: types.FETCH_POSTS_RECEIVED,
             posts,
             category
+          })
+          return { posts }
+        })
+        .then(({ posts }) => {
+          next({
+            type: types.UPDATE_CATEGORY_POST_COUNT,
+            posts
           })
         })
         .catch((err) => {
