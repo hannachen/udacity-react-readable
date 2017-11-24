@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
 import Header from './Header'
 import HomePage from './HomePage'
@@ -7,24 +7,19 @@ import AddPostPage from './posts/AddPostPage'
 import EditPostPage from './posts/EditPostPage'
 import PostPage from './posts/PostPage'
 
-class App extends Component {
-  render() {
+export default function App () {
+  return (
+    <div className="app">
 
-    return (
-      <div className="app">
+      <Header />
 
-        <Header />
-
-        <div className="contents">
-          <Route exact path='/' component={HomePage} />
-          <Route path='/category/:categoryId' component={CategoryPage} />
-          <Route path='/post/new/:categoryId' component={AddPostPage} />
-          <Route path='/post/edit/:postId' component={EditPostPage} />
-          <Route path='/post/view/:postId' component={PostPage} />
-        </div>
+      <div className="contents">
+        <Route exact path='/' component={HomePage} />
+        <Route path='/category/:categoryId' component={CategoryPage} />
+        <Route path='/post/new/:categoryId' component={AddPostPage} />
+        <Route path='/post/edit/:postId' component={EditPostPage} />
+        <Route path='/post/view/:postId' component={PostPage} />
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default App
