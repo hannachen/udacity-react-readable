@@ -1,4 +1,4 @@
-import * as types from '../actions/index'
+import * as types from '../actions/types'
 
 export const categories = (state = {}, action) => {
   switch(action.type) {
