@@ -115,20 +115,6 @@ const mapStateToProps = ({ categories, posts }, ownProps) => {
   const { postId } = ownProps.match.params
   const post = posts['all'][postId] || null
   const category = post && post.category ? categories[post.category] : null
-  return {
-    category,
-    post,
-  }
+  return { category, post }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchPost: (data) => dispatch(fetchPost(data)),
-    scorePost: (data) => dispatch(scorePost(data)),
-    deletePost: (data) => dispatch(deletePost(data)),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(PostPage)
+export default connect(mapStateToProps, { fetchPost, scorePost, deletePost })(PostPage)

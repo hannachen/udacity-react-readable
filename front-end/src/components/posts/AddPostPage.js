@@ -48,8 +48,8 @@ class AddPostPage extends Component {
     const timestamp = { timestamp: Date.now() }
     const data = Object.assign({}, post, timestamp)
 
-    const { newPost } = this.props
-    newPost(data)
+    const { addPost } = this.props
+    addPost(data)
       .then(() => {
         this.setState({ redirect: true })
       })
@@ -78,17 +78,6 @@ class AddPostPage extends Component {
 }
 
 const mapStateToProps = ({ categories }) => {
-  return {
-    categories
-  }
+  return { categories }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    newPost: (data) => dispatch(addPost(data)),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AddPostPage)
+export default connect(mapStateToProps, { addPost })(AddPostPage)

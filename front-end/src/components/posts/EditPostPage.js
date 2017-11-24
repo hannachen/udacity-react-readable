@@ -83,23 +83,9 @@ class EditPostPage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ posts, categories }, ownProps) => {
   const { postId } = ownProps.match.params
-  const post = state.posts['all'][postId] || null
-  const { categories } = state
-  return {
-    categories,
-    post
-  }
+  const post = posts['all'][postId] || null
+  return { categories, post }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchPost: (data) => dispatch(fetchPost(data)),
-    editPost: (data) => dispatch(editPost(data))
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(EditPostPage)
+export default connect(mapStateToProps, { fetchPost, editPost })(EditPostPage)

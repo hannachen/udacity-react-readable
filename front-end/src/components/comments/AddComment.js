@@ -49,8 +49,8 @@ class AddCommentPage extends Component {
       timestamp
     }
 
-    const { newComment, onSuccess } = this.props
-    newComment(data)
+    const { addComment, onSuccess } = this.props
+    addComment(data)
       .then(() => {
         onSuccess()
       })
@@ -72,13 +72,5 @@ class AddCommentPage extends Component {
 const mapStateToProps = () => {
   return {}
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    newComment: (data) => dispatch(addComment(data)),
-  }
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AddCommentPage)
+export default connect(mapStateToProps, { addComment })(AddCommentPage)

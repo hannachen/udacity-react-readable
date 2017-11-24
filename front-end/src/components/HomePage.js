@@ -36,13 +36,4 @@ const mapStateToProps = ({ categories, posts }) => {
     posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || null,
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchAllPosts: () => dispatch(fetchAllPosts()),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HomePage)
+export default connect(mapStateToProps, { fetchAllPosts })(HomePage)

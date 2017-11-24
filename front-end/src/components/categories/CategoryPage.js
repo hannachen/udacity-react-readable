@@ -36,18 +36,7 @@ const mapStateToProps = ({ categories, posts }, ownProps) => {
   const categoryPosts = posts['byCategory'][categoryId] || []
   return {
     category: categories[categoryId],
-    posts: categoryPosts.map((post) => {
-      return posts['all'][post] || null
-    }),
+    posts: categoryPosts.map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || null,
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchPosts: (data) => dispatch(fetchPosts(data)),
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CategoryPage)
+export default connect(mapStateToProps, { fetchPosts })(CategoryPage)
