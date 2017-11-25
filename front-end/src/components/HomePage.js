@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchAllPosts } from '../actions'
 import CategoryList from './categories/CategoryList'
-import Posts from './posts/Posts'
+import PostList from './posts/PostList'
 
 class HomePage extends Component {
   componentDidMount() {
@@ -21,9 +21,9 @@ class HomePage extends Component {
           <p>No categories available</p>
         }
         {posts.length ?
-          <Posts posts={posts} />
+          <PostList posts={posts} />
           :
-          <p>No posts yet!</p>
+          <p>No posts available</p>
         }
       </div>
     )
@@ -33,7 +33,7 @@ class HomePage extends Component {
 const mapStateToProps = ({ categories, posts }) => {
   return {
     categories,
-    posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || null,
+    posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || [],
   }
 }
 export default connect(mapStateToProps, { fetchAllPosts })(HomePage)

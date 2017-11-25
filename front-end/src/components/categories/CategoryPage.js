@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../../actions'
-import Posts from '../posts/Posts'
+import PostList from '../posts/PostList'
 
 class CategoryPage extends Component {
-  constructor() {
-    super()
-
-    this.fetchPosts = this.fetchPosts.bind(this)
-  }
   componentDidMount() {
-    this.fetchPosts()
-  }
-  fetchPosts() {
     const { categoryId } = this.props.match.params
     const { fetchPosts } = this.props
     fetchPosts(categoryId)
@@ -23,9 +15,7 @@ class CategoryPage extends Component {
 
     return (
       <div className='category-page'>
-        {category && posts &&
-          <Posts category={category} posts={posts} />
-        }
+        <PostList category={category} posts={posts} />
       </div>
     )
   }
@@ -36,7 +26,7 @@ const mapStateToProps = ({ categories, posts }, ownProps) => {
   const categoryPosts = posts['byCategory'][categoryId] || []
   return {
     category: categories[categoryId],
-    posts: categoryPosts.map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || null,
+    posts: categoryPosts.map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || [],
   }
 }
 export default connect(mapStateToProps, { fetchPosts })(CategoryPage)
