@@ -26,7 +26,7 @@ export const comments = (state = initialState, action) => {
           ...namedComments
         }
       }
-    case types.ADD_COMMENT:
+    case types.ADD_COMMENT_SUCCESS:
       return {
         ...state,
         'byPost': {
@@ -43,6 +43,8 @@ export const comments = (state = initialState, action) => {
       }
     case types.EDIT_COMMENT_SUCCESS:
     case types.SCORE_COMMENT_SUCCESS:
+    case types.DELETE_COMMENT_SUCCESS:
+      console.log('comment to delete...', comment)
       return {
         ...state,
         'all': {
@@ -50,18 +52,6 @@ export const comments = (state = initialState, action) => {
           [comment.id]: comment
         }
       }
-    case types.DELETE_COMMENT_SUCCESS:
-      const newState = {
-        ...state,
-        'byPost': {
-          [comment.parentId]:
-            state['byPost'][comment.parentId].filter((commentId) => {
-              return commentId !== comment.id
-            })
-        },
-      }
-      delete newState['all'][comment.id]
-      return newState
     default:
       return state
   }

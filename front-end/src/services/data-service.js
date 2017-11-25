@@ -109,7 +109,6 @@ const dataService = store => next => action => {
     case types.DELETE_POST:
       return api.deletePost(action.post.id)
         .then((post) => {
-          console.log('ready for next state...', post)
           next({
             type: types.DELETE_POST_SUCCESS,
             post,
@@ -158,9 +157,8 @@ const dataService = store => next => action => {
           return comment
         })
     case types.DELETE_COMMENT:
-      const { comment } = action
-      api.deleteComment(comment.id)
-        .then(() => {
+      api.deleteComment(action.comment.id)
+        .then((comment) => {
           next({
             type: types.DELETE_COMMENT_SUCCESS,
             comment,

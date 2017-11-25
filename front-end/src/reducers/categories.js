@@ -15,12 +15,12 @@ export const categories = (state = {}, action) => {
       const { posts } = action
       const categoriesWithPostCount = posts.reduce((result = {}, post) => {
         const category = result[post.category] || {}
-        const postCount = category['postCount'] || 0
+        const postCount = (category['postCount'] || 0) + 1
         return {
           ...result,
           [post.category]: {
             ...state[post.category],
-            ['postCount']: postCount + 1
+            postCount
           }
         }
       }, {})

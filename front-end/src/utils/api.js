@@ -145,7 +145,7 @@ class Api {
       headers: this.requestHeaders(),
     })
     return fetch(request)
-      .then(commentId)
+      .then((res) => res.json())
       .catch((error) => {
         return error
       })
