@@ -92,6 +92,7 @@ class PostList extends Component {
                   post={post}
                   scorePost={scorePost}
                   deletePost={this.deletePost}
+                  category={category ? null : post.category}
                 />
               ))}
             </ul>

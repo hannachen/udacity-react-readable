@@ -42,14 +42,17 @@ class PostListItem extends Component {
 
   render() {
 
-    const { post } = this.props
+    const { post, category } = this.props
     const formattedDate = (post && post.timestamp) ? moment.unix(post.timestamp/1000).format("MMMM DD, YYYY hh:mma") : null
 
     return (
       <li>
         <Link className='item-link' to={`/post/view/${post.id}`}>
           <div className='title-container'>
-            <div className='title'>{post.title}</div>
+            <div className='title'>
+              {category && <em>{category}</em>}
+              {post.title}
+            </div>
             <div className='author'>
               By {post.author}
               {formattedDate &&

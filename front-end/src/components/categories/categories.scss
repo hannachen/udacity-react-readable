@@ -69,6 +69,17 @@
   .item-link {
     color: $color-outer-space;
   }
+  .title em {
+    font-style: normal;
+    font-size: .75em;
+
+    &::before {
+      content: '['
+    }
+    &::after {
+      content: '] '
+    }
+  }
   .actions,
   .post-vote {
     display: flex;
