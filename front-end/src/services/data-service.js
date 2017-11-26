@@ -115,6 +115,17 @@ const dataService = store => next => action => {
           })
           return post
         })
+        .then((post) => {
+          const namedPosts = store.getState().posts['all']
+          const posts = Object.keys(namedPosts).map((post) => {
+            return namedPosts[post]
+          })
+          next({
+            type: types.UPDATE_CATEGORY_POST_COUNT,
+            posts
+          })
+          return post
+        })
     case types.FETCH_COMMENTS:
       api.fetchPostComments(action.postId)
         .then((data) => {

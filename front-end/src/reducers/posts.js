@@ -74,7 +74,6 @@ export const posts = (state = initialState, action) => {
       }
     case types.EDIT_POST_SUCCESS:
     case types.SCORE_POST_SUCCESS:
-    case types.DELETE_POST_SUCCESS:
       return {
         ...state,
         'all': {
@@ -82,6 +81,18 @@ export const posts = (state = initialState, action) => {
           [post.id]: post
         }
       }
+    case types.DELETE_POST_SUCCESS:
+      const newState = {
+        ...state,
+        'byCategory': {
+          [post.category]:
+            state['byCategory'][post.category].filter((postId) => {
+              return postId !== post.id
+            })
+        },
+      }
+      delete newState['all'][post.id]
+      return newState
     default:
       return state
   }
