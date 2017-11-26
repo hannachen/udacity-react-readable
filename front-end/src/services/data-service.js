@@ -82,6 +82,7 @@ const dataService = store => next => action => {
             type: types.ADD_POST_SUCCESS,
             post,
           })
+          return post
         })
     case types.EDIT_POST:
       return api.editPost(action.post)

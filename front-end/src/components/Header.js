@@ -29,7 +29,12 @@ class Header extends Component {
     const { homepage } = this.state
     return (
       <header>
-        { homepage ? (<h1 className="site-title">Browse categories and posts</h1>)
+        { homepage ? (
+          <div className='homepage-header'>
+            <h1 className="site-title">Browse categories and posts</h1>
+            <Link to='/post/new' className="home-link">Add new post</Link>
+          </div>
+          )
           :
           (<Link to={`/`} className="home-link">
             <HomeIcon size={24} />

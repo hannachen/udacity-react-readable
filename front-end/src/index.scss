@@ -62,10 +62,22 @@ header {
     padding: 0 0 0 .25em;
   }
 }
+.homepage-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .home-link {
+    font-size: .75em;
+    margin: 0 .5em 0;
+  }
+}
 .contents {
   padding: 0 .75em;
   line-height: 145%;
   overflow: hidden;
+  min-height: 20em;
 }
 nav {
   display: flex;
@@ -74,7 +86,11 @@ nav {
   padding: 0 .75em;
   background-color: $color-amazonite;
   box-sizing: border-box;
+  position: relative;
 
+  &.no-category {
+    background-color: $color-gray-light;
+  }
   .new-item-link,
   .subtitle {
     display: flex;
@@ -109,6 +125,37 @@ nav {
     font-size: .25em;
     text-transform: uppercase;
     color: $color-outer-space;
+  }
+  .selected-option {
+    cursor: pointer;
+  }
+  .options {
+    display: none;
+    padding: .5em 0 0;
+    background-color: $color-amethyst;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+
+    input {
+      display: none;
+    }
+    label {
+      display: flex;
+      padding: .75em .75em .75em .5em;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba($color-white-smoke, .5);
+      }
+    }
+    .selected {
+      color: $color-white-smoke;
+    }
+    &.open {
+      display: block;
+    }
   }
 }
 .sorting-container {

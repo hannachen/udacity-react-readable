@@ -93,6 +93,11 @@
     transform: rotate(130deg) translateX(-10px) translateY(-10px);
   }
 }
+.no-category {
+  svg {
+    transform: scaleY(-1) rotate(-90deg) translateX(-10px);
+  }
+}
 .post-form,
 .comment-form {
   .field,
@@ -103,6 +108,7 @@
     display: block;
     padding: .5em 0;
   }
+  input:disabled,
   input:read-only {
     opacity: .5;
   }

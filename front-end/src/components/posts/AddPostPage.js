@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v1'
 import { addPost } from '../../actions'
-import Nav from '../Nav'
+import NewCategoryNav from '../NewCategoryNav'
 import PostForm from './PostForm'
+import ArrowIcon from 'react-icons/lib/md/reply'
 import './posts.css'
 
 class AddPostPage extends Component {
@@ -16,13 +17,17 @@ class AddPostPage extends Component {
       author: '',
       category: '',
     },
-    redirect: false
+    redirect: false,
+    redirectTarget: null
   }
   constructor(props, context) {
     super(props, context)
 
+    this.handleBrowserHistory = this.handleBrowserHistory.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.selectCategory = this.selectCategory.bind(this)
+    this.changePostCategory = this.changePostCategory.bind(this)
 
     // Set default states
     const { categoryId } = this.props.match.params
@@ -35,6 +40,21 @@ class AddPostPage extends Component {
         id
       }
     }
+  }
+  componentWillMount() {
+    this.unlisten = this.handleBrowserHistory()
+  }
+  componentWillUnmount() {
+    this.unlisten()
+  }
+  handleBrowserHistory() {
+    const { categories, history } = this.props
+    return history.listen(({ state }) => {
+      if (categories) {
+        const category = state || ''
+        this.changePostCategory(category)
+      }
+    })
   }
   onChange(e) {
     const { post } = this.state
@@ -50,27 +70,50 @@ class AddPostPage extends Component {
 
     const { addPost } = this.props
     addPost(data)
-      .then(() => {
-        this.setState({ redirect: true })
+      .then((post) => {
+        this.setState({
+          redirect: true,
+          redirectTarget: `/post/view/${post.id}`
+        })
       })
+  }
+  selectCategory(category) {
+    this.changePostCategory(category)
+
+    const { history } = this.props
+    history.push(`/post/new/${category}`, category)
+  }
+  changePostCategory(category) {
+    const { post } = this.state
+    this.setState({
+      post: {
+        ...post,
+        category
+      }
+    })
   }
 
   render() {
-    const { categories } = this.props
-    const { post, redirect } = this.state
-    const { id, category } = post
-    const currentCategory = categories[category]
-
+    const { post, redirect, redirectTarget } = this.state
     if (redirect) {
-      return <Redirect to={`/post/view/${id}`} />
+      return <Redirect to={redirectTarget} />
     }
+
+    const { categories } = this.props
+    const currentCategory = categories[post.category] || null
+
     return (
       <div className='add-post'>
-        {currentCategory &&
-          <Nav category={currentCategory} title='Adding a new post' />
-        }
+        <NewCategoryNav categories={categories} category={currentCategory} onCategorySelect={this.selectCategory} />
         <div className='new-post'>
-          <PostForm post={post} submitCta='Add Post' onChange={this.onChange} onSubmit={this.onSubmit} />
+          {currentCategory ? (
+            <PostForm post={post} submitCta='Add Post' onChange={this.onChange} onSubmit={this.onSubmit} />
+          ) : (
+            <p className='no-category'>
+              <ArrowIcon size={32} />
+              Please begin by selecting a category
+            </p>
+          )}
         </div>
       </div>
     )
@@ -80,4 +123,5 @@ class AddPostPage extends Component {
 const mapStateToProps = ({ categories }) => {
   return { categories }
 }
-export default connect(mapStateToProps, { addPost })(AddPostPage)
+
+export default connect(mapStateToProps, { addPost })(withRouter(AddPostPage))
