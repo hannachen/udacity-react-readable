@@ -85,6 +85,7 @@ export const posts = (state = initialState, action) => {
       const newState = {
         ...state,
         'byCategory': {
+          ...state['byCategory'],
           [post.category]:
             state['byCategory'][post.category].filter((postId) => {
               return postId !== post.id

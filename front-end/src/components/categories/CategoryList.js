@@ -7,7 +7,7 @@ export default function CategoryList ({ categories }) {
     <ul className='category-list'>
       <h2>Categories</h2>
       {categories && Object.keys(categories).map((category) => (
-        <li key={categories[category].path}>
+        <li key={category}>
           <Link className='item-link' to={`/category/${categories[category].path}`}>
             <h3>{categories[category].name}</h3>
             <div className='posts'>

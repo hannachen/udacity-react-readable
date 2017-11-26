@@ -26,7 +26,7 @@ const mapStateToProps = ({ categories, posts }, ownProps) => {
   const categoryPosts = posts['byCategory'][categoryId] || []
   return {
     category: categories[categoryId],
-    posts: categoryPosts.map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || [],
+    posts: categoryPosts.map((postId) => (posts['all'][postId])) || [],
   }
 }
 export default connect(mapStateToProps, { fetchPosts })(CategoryPage)

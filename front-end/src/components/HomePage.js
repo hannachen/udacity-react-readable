@@ -33,7 +33,7 @@ class HomePage extends Component {
 const mapStateToProps = ({ categories, posts }) => {
   return {
     categories,
-    posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])).filter((post) => (!post.deleted)) || [],
+    posts: Object.keys(posts['all']).map((postId) => (posts['all'][postId])) || [],
   }
 }
 export default connect(mapStateToProps, { fetchAllPosts })(HomePage)

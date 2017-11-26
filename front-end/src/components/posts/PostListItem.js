@@ -42,6 +42,7 @@ class PostListItem extends Component {
 
   render() {
 
+    const { loading } = this.state
     const { post, category } = this.props
     const formattedDate = (post && post.timestamp) ? moment.unix(post.timestamp/1000).format("MMMM DD, YYYY hh:mma") : null
 
@@ -71,7 +72,7 @@ class PostListItem extends Component {
             </div>
           </div>
         </Link>
-        <ul className='actions'>
+        <ul className={(loading ? 'actions disabled' : 'actions')}>
           <li className='post-edit'>
             <Link className='edit-item-link' to={`/post/edit/${post.id}`}>
               <EditIcon size={22} />

@@ -13,6 +13,16 @@ export const categories = (state = {}, action) => {
       }, {})
     case types.UPDATE_CATEGORY_POST_COUNT:
       const { posts } = action
+      // Clear all post count and start over...
+      const resetCategories = Object.keys(state).reduce((result = {}, category) => {
+        return {
+          ...result,
+          [category]: {
+            ...state[category],
+            postCount: 0
+          }
+        }
+      }, {})
       const categoriesWithPostCount = posts.reduce((result = {}, post) => {
         const category = result[post.category] || {}
         const postCount = (category['postCount'] || 0) + 1
@@ -25,7 +35,7 @@ export const categories = (state = {}, action) => {
         }
       }, {})
       return {
-        ...state,
+        ...resetCategories,
         ...categoriesWithPostCount
       }
     default:

@@ -13,7 +13,7 @@ class PostList extends Component {
     order: 'desc',
     orderBy: 'voteScore',
     redirect: false,
-    redirectCategory: null,
+    redirectTarget: null,
   }
   constructor() {
     super()
@@ -50,21 +50,23 @@ class PostList extends Component {
   deletePost(post) {
     const { category, deletePost } = this.props
     deletePost(post)
-      .then(() => {
-        this.setState(() => ({
-          redirect: (category && category.path),
-          redirectCategory: post.category
-        }))
+      .then((post) => {
+        if (category && (post.category !== category.path)) {
+          this.setState(() => ({
+            redirect: true,
+            redirectTarget: `/category/${post.category}`
+          }))
+        }
       })
   }
 
   render() {
     const { category, posts, scorePost } = this.props
-    const { order, orderBy, redirect, redirectCategory } = this.state
+    const { order, orderBy, redirect, redirectTarget } = this.state
     const sortedPosts = posts ? this.sortPosts() : null
 
-    if (redirect && redirectCategory) {
-      return <Redirect to={`/category/${redirectCategory}`} />
+    if (redirect && redirectTarget) {
+      return <Redirect to={redirectTarget} />
     }
 
     return (

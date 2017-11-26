@@ -77,7 +77,9 @@ class PostPage extends Component {
     }
     return (
       <div className='post-page'>
-        <Nav category={category} post={post} />
+        {category && post &&
+          <Nav category={category} post={post} />
+        }
         <div className='post'>
           <p className='author'>By: {post.author}</p>
           <p className='body'>{post.body}</p>
