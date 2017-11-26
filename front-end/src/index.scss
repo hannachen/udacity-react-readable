@@ -62,15 +62,26 @@ header {
     padding: 0 0 0 .25em;
   }
 }
-.homepage-header {
+.homepage-header,
+.global-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  .home-link {
+  .new-post-link {
     font-size: .75em;
     margin: 0 .5em 0;
+  }
+}
+.global-header {
+  .category-select {
+    display: flex;
+    font-size: .75em;
+
+    select {
+      font-weight: bold;
+    }
   }
 }
 .contents {

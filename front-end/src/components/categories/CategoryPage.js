@@ -4,8 +4,23 @@ import { fetchPosts } from '../../actions'
 import PostList from '../posts/PostList'
 
 class CategoryPage extends Component {
+  constructor(props, context) {
+    super(props, context)
+
+    this.fetchPosts = this.fetchPosts.bind(this)
+  }
   componentDidMount() {
     const { categoryId } = this.props.match.params
+    this.fetchPosts(categoryId)
+  }
+  componentWillReceiveProps(nextProps) {
+    const { categoryId } = this.props.match.params
+    const nextCategory = nextProps.match.params.categoryId
+    if (categoryId !== nextCategory) {
+      this.fetchPosts(nextCategory)
+    }
+  }
+  fetchPosts(categoryId) {
     const { fetchPosts } = this.props
     fetchPosts(categoryId)
   }
