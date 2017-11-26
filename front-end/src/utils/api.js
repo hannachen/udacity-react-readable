@@ -48,7 +48,12 @@ class Api {
       headers: this.requestHeaders(),
     })
     return fetch(request)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status !== 200) {
+          throw new Error('Post not found')
+        }
+        return res.json()
+      })
   }
 
   static addPost(data) {

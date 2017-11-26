@@ -30,6 +30,11 @@ class PostPage extends Component {
     const { postId } = this.props.match.params
     const { fetchPost } = this.props
     fetchPost(postId)
+      .catch(() => this.setState({
+          redirect: true,
+          redirectTarget: '/'
+        })
+      )
   }
   upVote() {
     this.scorePost('upVote')
@@ -51,15 +56,14 @@ class PostPage extends Component {
     deletePost(post)
       .then(() => this.setState(() => ({
         redirect: true,
-        redirectCategory: post.category
+        redirectTarget: `/category/${post.category}`
       })))
   }
 
   render() {
-    const { redirect, redirectCategory } = this.state
-
-    if (redirect && redirectCategory) {
-      return <Redirect to={`/category/${redirectCategory}`} />
+    const { redirect, redirectTarget } = this.state
+    if (redirect) {
+      return <Redirect to={redirectTarget} />
     }
 
     const { category, post } = this.props

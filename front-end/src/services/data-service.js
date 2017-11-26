@@ -75,12 +75,6 @@ const dataService = store => next => action => {
           })
           return post
         })
-        .catch((err) => {
-          return next({
-            type: types.FETCH_POST_ERROR,
-            err
-          })
-        })
     case types.ADD_POST:
       return api.addPost(action.post)
         .then((post) => {
