@@ -66,7 +66,7 @@ class PostPage extends Component {
       return <Redirect to={redirectTarget} />
     }
 
-    const { category, post } = this.props
+    const { category, post, commentCount } = this.props
     const { voting } = this.state
     const formattedDate = (post && post.timestamp) ? moment.unix(post.timestamp/1000).format("MMMM DD, YYYY hh:mma") : null
 
@@ -91,7 +91,11 @@ class PostPage extends Component {
               </button>
             </div>
           </div>
-          <div className='post-score'>
+          <div className='post-actions'>
+            <div className='comments'>
+              <em>COMMENTS</em>
+              <strong>{commentCount}</strong>
+            </div>
             <div className='score'>
               <em>SCORE</em>
               <strong>{post.voteScore}</strong>
@@ -117,10 +121,11 @@ class PostPage extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, posts }, ownProps) => {
+const mapStateToProps = ({ categories, posts, comments }, ownProps) => {
   const { postId } = ownProps.match.params
   const post = posts['all'][postId] || null
   const category = post && post.category ? categories[post.category] : null
-  return { category, post }
+  const postComments = comments['byPost'][postId] || []
+  return { category, post, commentCount: postComments.length }
 }
 export default connect(mapStateToProps, { fetchPost, scorePost, deletePost })(PostPage)

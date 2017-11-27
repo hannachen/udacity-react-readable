@@ -11,10 +11,10 @@
     margin: 1em 0 1.5em;
   }
 }
-.post-score {
+.post-actions {
   border-top: 1px solid $color-gray-light;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: .5em 0 0;
 
@@ -31,9 +31,11 @@
       color: $color-amethyst;
     }
   }
+  .comments,
   .score {
     color: $color-amethyst;
     text-align: center;
+    padding: 0 .75em 0 0;
 
     em {
       display: block;
@@ -47,6 +49,8 @@
   }
   .post-vote {
     display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
   }
 }
 .post-page {
