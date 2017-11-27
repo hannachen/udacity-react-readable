@@ -68,7 +68,7 @@ class EditPostPage extends Component {
     const currentCategory = (post && post.category && categories) ? categories[post.category] : null
 
     if (redirect) {
-      return <Redirect to={`/post/view/${post.id}`} />;
+      return <Redirect to={`/${post.category}/${post.id}`} />;
     }
     return (
       <div className='edit-post'>

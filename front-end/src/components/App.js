@@ -15,10 +15,10 @@ export default function App () {
 
       <div className="contents">
         <Route exact path='/' component={HomePage} />
-        <Route path='/category/:categoryId' component={CategoryPage} />
+        <Route exact path='/:categoryId' component={CategoryPage} />
+        <Route exact path='/:categoryId/:postId' component={PostPage} />
         <Route path='/post/new/:categoryId?' component={AddPostPage} />
         <Route path='/post/edit/:postId' component={EditPostPage} />
-        <Route path='/post/view/:postId' component={PostPage} />
       </div>
     </div>
   )

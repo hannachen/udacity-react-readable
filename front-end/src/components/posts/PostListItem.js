@@ -48,7 +48,7 @@ class PostListItem extends Component {
 
     return (
       <li>
-        <Link className='item-link' to={`/post/view/${post.id}`}>
+        <Link className='item-link' to={`/${post.category}/${post.id}`}>
           <div className='title-container'>
             <div className='title'>
               {category && <em>{category}</em>}

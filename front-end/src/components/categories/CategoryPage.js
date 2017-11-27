@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { fetchPosts } from '../../actions'
 import PostList from '../posts/PostList'
 
@@ -27,6 +28,9 @@ class CategoryPage extends Component {
 
   render() {
     const { category, posts } = this.props
+    if (!category) {
+      return <Redirect to='/' />
+    }
 
     return (
       <div className='category-page'>
@@ -40,7 +44,7 @@ const mapStateToProps = ({ categories, posts }, ownProps) => {
   const { categoryId } = ownProps.match.params
   const categoryPosts = posts['byCategory'][categoryId] || []
   return {
-    category: categories[categoryId],
+    category: categories[categoryId] || null,
     posts: categoryPosts.map((postId) => (posts['all'][postId])) || [],
   }
 }

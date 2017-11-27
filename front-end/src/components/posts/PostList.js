@@ -54,7 +54,7 @@ class PostList extends Component {
         if (category && (post.category !== category.path)) {
           this.setState(() => ({
             redirect: true,
-            redirectTarget: `/category/${post.category}`
+            redirectTarget: `/${post.category}`
           }))
         }
       })

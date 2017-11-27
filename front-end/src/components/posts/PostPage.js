@@ -56,7 +56,7 @@ class PostPage extends Component {
     deletePost(post)
       .then(() => this.setState(() => ({
         redirect: true,
-        redirectTarget: `/category/${post.category}`
+        redirectTarget: `/${post.category}`
       })))
   }
 

@@ -29,7 +29,7 @@ class Header extends Component {
   changeCategory(e) {
     const category = e.target.value
     const { history } = this.props
-    history.push(`/category/${category}`)
+    history.push(`/${category}`)
   }
 
   render() {

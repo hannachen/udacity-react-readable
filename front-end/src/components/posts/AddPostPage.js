@@ -73,7 +73,7 @@ class AddPostPage extends Component {
       .then((post) => {
         this.setState({
           redirect: true,
-          redirectTarget: `/post/view/${post.id}`
+          redirectTarget: `/${post.category}/${post.id}`
         })
       })
   }
