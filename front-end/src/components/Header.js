@@ -41,7 +41,7 @@ class Header extends Component {
         { homepage ? (
           <div className='homepage-header'>
             <h1 className="site-title">Browse categories and posts</h1>
-            <Link to='/post/new' className="new-post-link">Add new post</Link>
+            <Link to='/newPost' className="new-post-link">Add new post</Link>
           </div>
           )
           :

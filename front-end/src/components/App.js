@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Header from './Header'
 import HomePage from './HomePage'
 import CategoryPage from './categories/CategoryPage'
@@ -14,11 +14,13 @@ export default function App () {
       <Header />
 
       <div className="contents">
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/:categoryId' component={CategoryPage} />
-        <Route exact path='/:categoryId/:postId' component={PostPage} />
-        <Route path='/post/new/:categoryId?' component={AddPostPage} />
-        <Route path='/post/edit/:postId' component={EditPostPage} />
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/newPost/:categoryId?' component={AddPostPage} />
+          <Route path='/editPost/:postId' component={EditPostPage} />
+          <Route exact path='/:categoryId' component={CategoryPage} />
+          <Route exact path='/:categoryId/:postId' component={PostPage} />
+        </Switch>
       </div>
     </div>
   )

@@ -81,7 +81,7 @@ class AddPostPage extends Component {
     this.changePostCategory(category)
 
     const { history } = this.props
-    history.push(`/post/new/${category}`, category)
+    history.push(`/newPost/${category}`, category)
   }
   changePostCategory(category) {
     const { post } = this.state

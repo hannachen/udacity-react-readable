@@ -14,7 +14,7 @@ export default function Nav ({ category, post, title }) {
         {title ?
           <h2 className='subtitle'>{title}</h2>
           :
-          <Link className="new-item-link" to={`/post/new/${category.path}`}>
+          <Link className="new-item-link" to={`/newPost/${category.path}`}>
             Add Post
           </Link>
         }
@@ -28,7 +28,7 @@ export default function Nav ({ category, post, title }) {
           {title ?
             <h2 class='subtitle'>{title}</h2>
             :
-            <Link className='new-item-link' to={`/post/edit/${post.id}`}>
+            <Link className='new-item-link' to={`/editPost/${post.id}`}>
               Edit Post
             </Link>
           }

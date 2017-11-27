@@ -74,7 +74,7 @@ class PostListItem extends Component {
         </Link>
         <ul className={(loading ? 'actions disabled' : 'actions')}>
           <li className='post-edit'>
-            <Link className='edit-item-link' to={`/post/edit/${post.id}`}>
+            <Link className='edit-item-link' to={`/editPost/${post.id}`}>
               <EditIcon size={22} />
             </Link>
           </li>
